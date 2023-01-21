@@ -16,10 +16,15 @@ const userSchema = new Schema(
       lowercase: true,
       trim: true
     },
-    password: {
+    hashedPassword: {
       type: String,
       required: true
-    }
+    },
+    userType:{
+      type : String
+    }, 
+    books : [{type : Schema.Types.ObjectId,ref:'Books' }]
+  
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`    
