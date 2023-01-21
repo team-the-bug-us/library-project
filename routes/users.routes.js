@@ -3,7 +3,7 @@ const router = express.Router();
 
 /* GET home page */
 
-router.get("/profile", (req, res, next) => {
+router.get("/profile/id", (req, res, next) => {
     res.render("user/my-profile");
   });
 
