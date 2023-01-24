@@ -19,7 +19,7 @@ const bookSchema = new Schema(
     rating : {
         type: Number 
     },
-    prices : {
+    price : {
         type: Number 
     } 
   
