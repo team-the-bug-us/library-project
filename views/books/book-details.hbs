@@ -1,1 +1,37 @@
 <h1>BOOK-DETAILS</h1>
+
+<a href="/books">Go Back</a>
+
+<div class="d-flex flex-row p-3 m-2" style="width: 18rem;">
+    <div>
+        <img src="{{image}}" class="" alt="book cover">
+    </div>
+    <div style="width: 500px;">
+        <div>
+            <h3 class="">{{title}}</h3>
+            <label for="">Author(s): <h4 class="">
+                    {{#each authors}}
+                    {{this}} ,
+                    {{/each}}
+                </h4></label>
+            <label for="">Genre:<h4 class="">{{genre}}</h4></label>
+            <label for="">Rating: <h5 class="">{{rating}}</h5></label>
+            <h5 class="">{{prices}} </h5>
+            <p class="">{{description}}</p>
+            <a href="#" class="btn btn-success">Add to my shelf</a>
+        </div>
+        <div class="container comments">
+            <div>
+                <p>user rating</p>
+            </div>
+            <div>
+                <p>user comments</p>
+            </div>
+        </div>
+        <div>
+            <form action="">
+                <p>add comments</p>
+            </form>
+        </div>
+    </div>
+</div>
