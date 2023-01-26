@@ -29,7 +29,8 @@ router.get("/login", (req, res, next) => {
         res.render('auth/login',{errorMessage:"user doesn't exist"})
         return
       } else if (bcrypt.compareSync(password,user.hashedPassword)) {
-        res.redirect(`/profile/${user._id}`)
+        req.session.currentUser = user
+        res.redirect(`/profile`)
       } else {
         res.render('auth/login',{errorMessage:"incorrect pwd"})
       }
@@ -66,18 +67,17 @@ router.post("/signup", (req, res, next) => {
     console.log(hashedPassword)
     return Users.create({username:username,email:email,hashedPassword: hashedPassword,userType:userType})
   })
-  .then(user =>res.redirect(`/profile/${user._id}`))
+  .then(user =>res.redirect(`/profile`))
   .catch(err=>console.log(`error with the signup ${err}`))
   
 });
 
 
 router.post("/logout",(req,res,next)=>{
-  // req.session.destroy(err=>{
-  //   if(err) next (err);
-  //   res.redirect('/')
-  // })
-  res.redirect('/')
+  req.session.destroy(err=>{
+     if(err) next (err);
+     res.redirect('/')
+   })
 })
 
 module.exports = router;
