@@ -17,5 +17,4 @@ router.get("/books/:id", (req, res, next) => {
   .then(result => res.render("books/book-details", result))
 });
 
-
 module.exports = router;

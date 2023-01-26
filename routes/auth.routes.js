@@ -1,7 +1,9 @@
 const express = require('express');
 const Users = require('../models/User.model');
 const router = express.Router();
- 
+const bcrypt = require("bcrypt")
+const saltRounds = 10
+
 
 /* GET home page */
 
@@ -14,9 +16,9 @@ router.get("/login", (req, res, next) => {
 
     console.log(req.body)
 
-    const {email, hashedPassword} = req.body
+    const {email, password} = req.body
 
-    if(email ==="" || hashedPassword==="" ) {
+    if(email ==="" || password==="" ) {
       res.render('auth/login',{errorMessage:'fill both email & pwd'})
       return
     }
@@ -26,7 +28,7 @@ router.get("/login", (req, res, next) => {
       if(!user){
         res.render('auth/login',{errorMessage:"user doesn't exist"})
         return
-      } else if (user.hashedPassword === hashedPassword) {
+      } else if (bcrypt.compareSync(password,user.hashedPassword)) {
         res.redirect(`/profile/${user._id}`)
       } else {
         res.render('auth/login',{errorMessage:"incorrect pwd"})
@@ -45,11 +47,26 @@ router.get("/signup", (req, res, next) => {
 
 router.post("/signup", (req, res, next) => {
   
-  Users.create(req.body)
-  .then((result)=>{
-    console.log(result._id)
-    res.redirect(`/profile/${result._id}`);
+  const {username, email, password, userType} = req.body
+  console.log(password)
+  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+  //email and password client inputs validation
+  if(!username || !password){
+      res.render("auth/signup", {errorMessage: "You have to fill both fields"})
+      return
+  }else if(!regex.test(password)){
+      res.render("auth/signup", {username, password, errorMessage:"The password has to have minimum 6 characters with at least one lower case and one upper case letter"})
+      return
+  }
+
+  bcrypt
+  .genSalt(saltRounds)
+  .then(salt => bcrypt.hash(password,salt))
+  .then(hashedPassword => {
+    console.log(hashedPassword)
+    return Users.create({username:username,email:email,hashedPassword: hashedPassword,userType:userType})
   })
+  .then(user =>res.redirect(`/profile/${user._id}`))
   .catch(err=>console.log(`error with the signup ${err}`))
   
 });
