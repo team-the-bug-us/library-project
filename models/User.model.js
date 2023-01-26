@@ -14,7 +14,8 @@ const userSchema = new Schema(
       required: true,
       unique: true,
       lowercase: true,
-      trim: true
+      trim: true,
+      match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address']
     },
     hashedPassword: {
       type: String,
