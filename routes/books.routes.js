@@ -3,17 +3,8 @@ const { isLoggedIn } = require('../middlewares/route-guard');
 const router = express.Router();
 const Books = require("../models/Books.model")
 const Comments = require("../models/Comments.model")
+const axios = require("axios");
 /* GET home page */
-
-router.get("/books",(req, res, next) => {
- 
-  Books.find()
-  .then(books => {
-    /* console.log(books) */
-    const result = {books, userLoggedIn: req.session.currentUser}
-    res.render("books/book-list", result)
-  })
-  });
 
 router.get("/books/:id", (req, res, next) => {
   Books.findById(req.params.id)
@@ -37,4 +28,44 @@ router.post("/books/:id/post-comment", (req,res,next)=>{
   .catch(error=>console.log("there was an error with creating comment", error))
 })
 
+
+//search function
+
+function createSearchBookUrl(arrWords){
+    return `https://www.googleapis.com/books/v1/volumes?q=${arrWords.join("+")}`
+}
+
+
+router.post("/searchAPI", (req,res,next)=>{
+  const arrWords = req.body.keywords.split(" ")
+  console.log(arrWords)
+  axios.get(createSearchBookUrl(arrWords))
+  .then(result => {
+    // add property to items
+    const items = result.data.items
+    res.render("books/book-list", {items})
+  })
+  .catch(err => console.log("API access error", err))
+
+//add google book to our data base
+
+/* router.post("/books/:googleId/details", (req, res, next)=>{
+  
+}) */
+
+/*   let books;
+  Users.find()
+    .then((shelf) => {
+      books = shelf
+      return axios.get(createSearchBookUrl(arrWords))
+    })
+  .then(result => {
+    // add property to items
+    const items =result.data.items
+    res.render("books/book-list", {items})
+  })
+  .catch(err => console.log("API access error", err)) */
+})
+
 module.exports = router;
+ 

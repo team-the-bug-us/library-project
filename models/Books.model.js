@@ -7,16 +7,16 @@ const bookSchema = new Schema(
       type: String
     },
     authors: [{type : String }],
-    genre: {
+    categorie: [{
       type: String 
-    },
+    }],
     description:{
       type : String
     }, 
     image :{
         type: String 
     },
-    rating : {
+    averageRating : {
         type: Number 
     },
     price : {

@@ -31,12 +31,13 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form class="d-flex" role="search">
+          <form action="/searchAPI" method="post" class="d-flex" role="search">
             <input
               class="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
+              name="keywords"
             />
             <button
               class="btn btn-outline-success"
@@ -44,9 +45,6 @@
             >Search</button>
           </form>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="/books">Books</a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" href="/about-us">About us</a>
             </li>
@@ -97,6 +95,7 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    
   </body>
 
 </html>
