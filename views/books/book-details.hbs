@@ -18,7 +18,9 @@
             <label for="">Rating: <h5 class="">{{rating}}</h5></label>
             <h5 class="">{{prices}} </h5>
             <p class="">{{description}}</p>
-            <a href="#" class="btn btn-success">Add to my shelf</a>
+             <form action="/add-book/{{_id}}/detail" method="post">
+            <button class="btn btn-success" type="submit">Add to my shelf</button>
+          </form>
         </div>
         <div class="container comments">
             <div>

@@ -19,17 +19,19 @@
         {{!-- <p class="card-text">{{description}}</p> --}}
         <a href="/books/{{_id}}" class="btn btn-primary">See book details</a>
 
-        {{#if userInSession}}
+        {{!-- {{#if userInSession}} --}}
           <form action="/add-book/{{_id}}" method="post">
             <button class="btn btn-success" type="submit">Add to my shelf</button>
           </form>
-        {{/if}}
+        {{!-- {{/if}} --}} 
 
       </div>
     </div>
   {{/each}}
 </div>
 
+<br>
+<h2 id="error"></h2>
 
         {{#if userInSession}}
           <form action="/add-book/{{_id}}" method="post">

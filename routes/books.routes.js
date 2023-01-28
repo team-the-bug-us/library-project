@@ -6,6 +6,7 @@ const Books = require("../models/Books.model")
 /* GET home page */
 
 router.get("/books",(req, res, next) => {
+ 
   Books.find()
   .then(books => {
     console.log(books)
