@@ -1,14 +1,16 @@
 const express = require('express');
+const { isLoggedIn } = require('../middlewares/route-guard');
 const router = express.Router();
 const Books = require("../models/Books.model")
 
 /* GET home page */
 
-router.get("/books", (req, res, next) => {
+router.get("/books",(req, res, next) => {
   Books.find()
-  .then(result => {
-    console.log(result)
-    res.render("books/book-list", {result})
+  .then(books => {
+    console.log(books)
+    const result = {books, userLoggedIn: req.session.currentUser}
+    res.render("books/book-list", result)
   })
   });
 

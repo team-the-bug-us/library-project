@@ -12,7 +12,12 @@ router.get("/profile",isLoggedIn, (req, res, next) => {
   });
 
 router.get("/profile/shelf", isLoggedIn,(req, res, next) => {
-    res.render("user/my-shelf",{userInSession: req.session.currentUser});
+  Users.findById(req.session.currentUser._id)
+  .populate('books')
+  .then((user)=>{
+    res.render("user/my-shelf", {user});
+
+  })
  
 });
 
@@ -23,6 +28,14 @@ router.post('/add-book/:id',(req,res,next)=>{
   .catch((err)=>console.log('something went wrong with adding books',err))
 
 
+})
+
+router.post('/delete-book/:id',(req,res,next)=>{
+  
+  Users.findByIdAndUpdate(req.session.currentUser._id,{$pull:{books:req.params.id}},{new:true})
+  .then(()=>{res.redirect('/profile/shelf')})
+  
+  .catch((err)=>console.log('something went wrong with deleting books',err))
 })
 
 
