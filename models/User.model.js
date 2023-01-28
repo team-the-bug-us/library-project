@@ -24,7 +24,7 @@ const userSchema = new Schema(
     userType:{
       type : String
     }, 
-    books : [{type : Schema.Types.ObjectId,ref:'Books' }]
+    books : [{type : Schema.Types.ObjectId,ref:'Books' , unique:true}]
   
   },
   {

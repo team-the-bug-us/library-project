@@ -1,25 +1,38 @@
 <h1>BOOK-LIST</h1>
 
-<div class="container d-flex flex-row p-3"> 
-{{#each result}}
+<div class="container d-flex flex-row p-3">
+  {{#each books}}
     <div class="card p-3 m-2" style="width: 18rem;">
-        <img src="{{image}}" class="card-img-top" alt="book cover">
-        <div class="card-body">
-            <h3 class="card-title">{{title}}</h3>
-            <label for="">Author(s): <h4 class="card-subtitle">
-                {{#each authors}}
-                    {{this}} ,
-                {{/each}}
-            </h4></label>
-            <label for="">Genre:<h4 class="card-subtitle">{{genre}}</h4></label>
-            <label for="">Rating: <h5 class="card-subtitle">{{rating}}</h5></label> 
-            <h5 class="card-subtitle">{{prices}} </h5>
-            {{!-- <p class="card-text">{{description}}</p> --}}
-            <a href="/books/{{_id}}" class="btn btn-primary">See book details</a>
-            <form action="/add-book/{{_id}}" method="post"> 
-            <button class="btn btn-success" type="submit">Add to my shelf</button> 
-            </form>
-        </div>
+      <img src="{{image}}" class="card-img-top" alt="book cover" />
+      <div class="card-body">
+        <h3 class="card-title">{{title}}</h3>
+        <label for="">Author(s):
+          <h4 class="card-subtitle">
+            {{#each authors}}
+              {{this}}
+              ,
+            {{/each}}
+          </h4></label>
+        <label for="">Genre:<h4 class="card-subtitle">{{genre}}</h4></label>
+        <label for="">Rating: <h5 class="card-subtitle">{{rating}}</h5></label>
+        <h5 class="card-subtitle">{{prices}} </h5>
+        {{!-- <p class="card-text">{{description}}</p> --}}
+        <a href="/books/{{_id}}" class="btn btn-primary">See book details</a>
+
+        {{#if userInSession}}
+          <form action="/add-book/{{_id}}" method="post">
+            <button class="btn btn-success" type="submit">Add to my shelf</button>
+          </form>
+        {{/if}}
+
+      </div>
     </div>
-{{/each}}
+  {{/each}}
 </div>
+
+
+        {{#if userInSession}}
+          <form action="/add-book/{{_id}}" method="post">
+            <button class="btn btn-success" type="submit">Add to my shelf</button>
+          </form>
+        {{/if}}

@@ -1,9 +1,9 @@
 <h1>MY SHELF</h1>
-<p>this is {{userInSession.username}}'s shelf</p>
+<p>this is {{user.username}}'s shelf</p>
  <video src=""><source src="https://www.youtube.com/watch?v=L_LUpnjgPso" type="video"></video>
 
  <div class="container d-flex flex-row p-3"> 
-{{#each userInSession.books}}
+{{#each user.books}}
     <div class="card p-3 m-2" style="width: 18rem;">
         <img src="{{image}}" class="card-img-top" alt="book cover">
         <div class="card-body">
@@ -18,7 +18,9 @@
             <h5 class="card-subtitle">{{prices}} </h5>
             {{!-- <p class="card-text">{{description}}</p> --}}
             <a href="/books/{{_id}}" class="btn btn-primary">See book details</a>
-            <a href="#" class="btn btn-success">Add to my shelf</a>
+            <form action="/delete-book/{{_id}}" method="post"> 
+            <a href="" class="btn btn-success">Delete</a>
+            </form>
         </div>
     </div>
 {{/each}}
