@@ -15,7 +15,7 @@ router.get("/login", (req, res, next) => {
 
   router.post("/login", (req, res, next) => {
 
-    console.log(req.body)
+    /* console.log(req.body) */
 
     const {email, password} = req.body
 
@@ -50,7 +50,7 @@ router.get("/signup", (req, res, next) => {
 router.post("/signup", (req, res, next) => {
   
   const {username, email, password, userType} = req.body
-  console.log(password)
+  /* console.log(password) */
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   //email and password client inputs validation
   if(!username || !password){
@@ -65,7 +65,7 @@ router.post("/signup", (req, res, next) => {
   .genSalt(saltRounds)
   .then(salt => bcrypt.hash(password,salt))
   .then(hashedPassword => {
-    console.log(hashedPassword)
+    /* console.log(hashedPassword) */
     return Users.create({username:username,email:email,hashedPassword: hashedPassword,userType:userType})
   })
   .then(user =>{

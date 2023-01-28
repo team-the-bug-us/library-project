@@ -4,35 +4,46 @@
 
 <div class="d-flex flex-row p-3 m-2" style="width: 18rem;">
     <div>
-        <img src="{{image}}" class="" alt="book cover">
+        <img src="{{book.image}}" class="" alt="book cover">
     </div>
     <div style="width: 500px;">
         <div>
-            <h3 class="">{{title}}</h3>
+            <h3 class="">{{book.title}}</h3>
             <label for="">Author(s): <h4 class="">
-                    {{#each authors}}
+                    {{#each book.authors}}
                     {{this}} ,
                     {{/each}}
                 </h4></label>
-            <label for="">Genre:<h4 class="">{{genre}}</h4></label>
-            <label for="">Rating: <h5 class="">{{rating}}</h5></label>
-            <h5 class="">{{prices}} </h5>
-            <p class="">{{description}}</p>
-             <form action="/add-book/{{_id}}/detail" method="post">
+            <label for="">Genre:<h4 class="">{{book.genre}}</h4></label>
+            <label for="">Rating: <h5 class="">{{book.rating}}</h5></label>
+            <h5 class="">{{book.prices}} </h5>
+            <p class="">{{book.description}}</p>
+             <form action="/add-book/{{book._id}}/detail" method="post">
             <button class="btn btn-success" type="submit">Add to my shelf</button>
           </form>
         </div>
         <div class="container comments">
-            <div>
-                <p>user rating</p>
+            {{#each comments}}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{userId.username}} posted: </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
+                    <p class="card-text">{{comment}}</p>
+                </div>
             </div>
-            <div>
-                <p>user comments</p>
-            </div>
+            {{/each}}
         </div>
         <div>
-            <form action="">
-                <p>add comments</p>
+            <form action="/books/{{book._id}}/post-comment" method="post">
+            <div class="mb-3">
+                <label class="form-label">Ratings</label>
+                <input type="number" class="form-control" name="rating" min="0" max="5">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Comment</label>
+                <input type="text" class="form-control" name="comment">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
