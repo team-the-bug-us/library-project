@@ -1,9 +1,9 @@
 <h1>MY SHELF</h1>
-<p>this is {{username}}'s shelf</p>
+<p>this is {{userInSession.username}}'s shelf</p>
  <video src=""><source src="https://www.youtube.com/watch?v=L_LUpnjgPso" type="video"></video>
 
  <div class="container d-flex flex-row p-3"> 
-{{#each result.books}}
+{{#each userInSession.books}}
     <div class="card p-3 m-2" style="width: 18rem;">
         <img src="{{image}}" class="card-img-top" alt="book cover">
         <div class="card-body">

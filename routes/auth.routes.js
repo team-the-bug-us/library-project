@@ -1,7 +1,8 @@
 const express = require('express');
 const Users = require('../models/User.model');
 const router = express.Router();
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const { application } = require('express');
 const saltRounds = 10
 
 
@@ -67,7 +68,10 @@ router.post("/signup", (req, res, next) => {
     console.log(hashedPassword)
     return Users.create({username:username,email:email,hashedPassword: hashedPassword,userType:userType})
   })
-  .then(user =>res.redirect(`/profile`))
+  .then(user =>{
+    req.session.currentUser = user
+    res.redirect(`/profile`)
+  })
   .catch(err=>console.log(`error with the signup ${err}`))
   
 });
