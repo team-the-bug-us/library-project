@@ -16,12 +16,17 @@ router.get("/books/:id", (req, res, next) => {
     return book
     })
     .then(book => {
-      Comments.find({bookId:req.params.id})
+    const imageLinks = book.volumeInfo.imageLinks
+    book.volumeInfo.imageLinks = imageLinks.extraLarge || imageLinks.large || imageLinks.medium ||  imageLinks.small ||  imageLinks.thumbnail ||  imageLinks.smallThumbnail
+    
+    console.log(book.volumeInfo.imageLinks)
+    
+    Comments.find({bookId:req.params.id})
     .populate("userId")
     .then(comments => {
-/*       console.log(comments)
-      console.log(book) */ 
-      res.render("books/book-details", {book,comments})
+/*       console.log(comments)*/ 
+      console.log(book) 
+      res.render("books/book-details", {book ,comments})
     })
     .catch(error=>console.log("there was an error with getting book details", error))
   })
@@ -51,6 +56,10 @@ router.post("/search-results", (req,res,next)=>{
   .then(result => {
     // add property to items
     const items = result.data.items
+    for(let i=0; i< items.length; i++){
+      let imageLinks = items[i].volumeInfo.imageLinks
+      items[i].volumeInfo.imageLinks = imageLinks.extraLarge || imageLinks.large || imageLinks.medium ||  imageLinks.small ||  imageLinks.thumbnail ||  imageLinks.smallThumbnail
+    }
     res.render("books/book-list", {items})
   })
   .catch(err => console.log("API access error", err))

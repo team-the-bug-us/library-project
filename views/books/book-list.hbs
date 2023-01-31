@@ -3,7 +3,7 @@
 <div class="container d-flex flex-row flex-wrap p-3">
   {{#each items}}
   <div class="card p-3 m-2" style="width: 18rem;">
-    <img src="{{volumeInfo.imageLinks.thumbnail}}" class="card-img-top" alt="book cover" />
+    <img src="{{volumeInfo.imageLinks}}" class="card-img-top" alt="book cover" />
     <div class="card-body">
       <h3 class="card-title">{{volumeInfo.title}}</h3>
       <label for="">Author(s):
@@ -26,14 +26,14 @@
       <h5 class="card-subtitle">{{volumeInfo.retailPrice.amount}} {{volumeInfo.retailPrice.currencyCode}}</h5>
 
 
-      <a href="/books/{{id}}" class="btn btn-success">See book details</a>
+      <a href="/books/{{id}}" class="btn btn-success m-1">See book details</a>
 
-
-      {{!-- {{#if ../userInSession}} --}}
+      <br>
+      {{#if ../userInSession}}
       <form action="/add-book/{{id}}" method="post">
-        <button class="btn btn-success" type="submit">Add to my shelf</button>
+        <button class="btn btn-success m-1" type="submit">Add to my shelf</button>
       </form>
-      {{!-- {{/if}} --}}
+      {{/if}}
 
     </div>
   </div>
