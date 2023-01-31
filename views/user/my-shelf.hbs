@@ -1,27 +1,40 @@
 <h1>MY SHELF</h1>
 <p>this is {{user.username}}'s shelf</p>
- <video src=""><source src="https://www.youtube.com/watch?v=L_LUpnjgPso" type="video"></video>
+<video src="">
+    <source src="https://www.youtube.com/watch?v=L_LUpnjgPso" type="video">
+</video>
 
- <div class="container d-flex flex-row p-3"> 
-{{#each user.books}}
+<div class="container d-flex flex-row p-3">
+    {{#each books}}
     <div class="card p-3 m-2" style="width: 18rem;">
-        <img src="{{image}}" class="card-img-top" alt="book cover">
+        <img src="{{volumeInfo.imageLinks.thumbnail}}" class="card-img-top" alt="book cover" />
         <div class="card-body">
-            <h3 class="card-title">{{title}}</h3>
-            <label for="">Author(s): <h4 class="card-subtitle">
-                {{#each authors}}
-                    {{this}} ,
-                {{/each}}
-            </h4></label>
-            <label for="">Genre:<h4 class="card-subtitle">{{genre}}</h4></label>
-            <label for="">Rating: <h5 class="card-subtitle">{{rating}}</h5></label> 
-            <h5 class="card-subtitle">{{prices}} </h5>
+            <h3 class="card-title">{{volumeInfo.title}}</h3>
+            <label for="">Author(s):
+                <h4 class="card-subtitle">
+                    {{#each volumeInfo.authors}}
+                    {{this}}
+                    ,
+                    {{/each}}
+                </h4>
+            </label>
+            <label for="">Categories:<h4 class="card-subtitle">
+                    <ul>
+                        {{#each volumeInfo.categories}}
+                        <li>this</li>
+                        {{/each}}
+                    </ul>
+
+                </h4></label>
+            <label for="">Rating: <h5 class="card-subtitle">{{volumeInfo.averageRating}}</h5></label>
+            <h5 class="card-subtitle">{{volumeInfo.retailPrice.amount}} {{volumeInfo.retailPrice.currencyCode}}</h5>
+
             {{!-- <p class="card-text">{{description}}</p> --}}
-            <a href="/books/{{_id}}" class="btn btn-primary">See book details</a>
-            <form action="/delete-book/{{_id}}" method="post"> 
-            <button class="btn btn-danger" type="submit">Delete</button> 
+            <a href="/books/{{id}}" class="btn btn-primary">See book details</a>
+            <form action="/delete-book/{{id}}" method="post">
+                <button class="btn btn-danger" type="submit">Delete</button>
             </form>
         </div>
     </div>
-{{/each}}
+    {{/each}}
 </div>

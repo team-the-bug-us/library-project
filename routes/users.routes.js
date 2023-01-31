@@ -2,9 +2,8 @@ const express = require("express");
 const { route } = require("./index.routes");
 const router = express.Router();
 const Users = require("../models/User.model");
-const Books = require("../models/Books.model");
 const { isLoggedIn, isLoggedOut } = require("../middlewares/route-guard");
-
+const axios = require('axios')
 /* GET home page */
 
 router.get("/profile", isLoggedIn, (req, res, next) => {
@@ -13,10 +12,23 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
 
 router.get("/profile/shelf", isLoggedIn, (req, res, next) => {
   Users.findById(req.session.currentUser._id)
-    .populate("books")
     .then((user) => {
-      res.render("user/my-shelf", { user });
-    });
+      const bookIds = user.books
+      let books 
+      for(let i in bookIds){
+        axios.get(`https://www.googleapis.com/books/v1/volumes/${bookIds[i]}`)
+        .then(result => {
+          console.log(typeof result.data)
+          books.push(result.data)
+        })
+        .catch(err => console.log("book not pushed in array of books", err))
+      }
+      return books
+    })
+    .then(books => {
+      console.log(books)
+      res.render("user/my-shelf",{books})})
+    .catch((err) =>console.log("something went wrong with showing shelf", err));
 });
 
 router.post("/add-book/:id", (req, res, next) => {
@@ -26,10 +38,8 @@ router.post("/add-book/:id", (req, res, next) => {
       // let error = document.getElementById("error") 
       // error.textContent = "Book already in Shelf"
       // error.style.color = "red" 
-      res.redirect("/books");  
+      res.redirect("/");  
       return
-   
-
     } else {
       Users.findByIdAndUpdate(
         req.session.currentUser._id,

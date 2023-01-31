@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose");
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
 const commentsSchema = new Schema(
   {
-    bookId:{type : Schema.Types.ObjectId,ref:'Books' },
+    bookId:String,
     userId:{type : Schema.Types.ObjectId,ref:'User' }, 
     comment:{
       type : String
