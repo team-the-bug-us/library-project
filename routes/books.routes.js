@@ -4,6 +4,8 @@ const router = express.Router();
 const Books = require("../models/Books.model")
 const Comments = require("../models/Comments.model")
 const axios = require("axios");
+const fillingImgUrl = "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/mystery-book-cover-design-template-a5dce61a0c99630dedab42e3a4c15618_screen.jpg?ts=1637014687"
+
 /* GET home page */
 
 router.get("/books/:id", (req, res, next) => {
@@ -17,8 +19,11 @@ router.get("/books/:id", (req, res, next) => {
     })
     .then(book => {
     const imageLinks = book.volumeInfo.imageLinks
+    if(imageLinks){
     book.volumeInfo.imageLinks = imageLinks.extraLarge || imageLinks.large || imageLinks.medium ||  imageLinks.small ||  imageLinks.thumbnail ||  imageLinks.smallThumbnail
-    
+    }else{
+      book.volumeInfo.imageLinks = fillingImgUrl
+    }
     console.log(book.volumeInfo.imageLinks)
     
     Comments.find({bookId:req.params.id})
@@ -55,11 +60,15 @@ router.post("/search-results", (req,res,next)=>{
   axios.get(createSearchBookUrl(arrWords))
   .then(result => {
     // add property to items
-    const items = result.data.items
+    let items = result.data.items
+    console.log(items[0])
     for(let i=0; i< items.length; i++){
       let imageLinks = items[i].volumeInfo.imageLinks
+      if(imageLinks){
       items[i].volumeInfo.imageLinks = imageLinks.extraLarge || imageLinks.large || imageLinks.medium ||  imageLinks.small ||  imageLinks.thumbnail ||  imageLinks.smallThumbnail
-    }
+    }else{
+      items[i].volumeInfo.imageLinks =fillingImgUrl
+    }}
     res.render("books/book-list", {items})
   })
   .catch(err => console.log("API access error", err))
