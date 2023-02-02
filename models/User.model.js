@@ -14,12 +14,18 @@ const userSchema = new Schema(
       required: true,
       unique: true,
       lowercase: true,
-      trim: true
+      trim: true,
+      match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address']
     },
-    password: {
+    hashedPassword: {
       type: String,
       required: true
-    }
+    },
+    isAdmin:{
+      type : Boolean
+    }, 
+    books : [String]
+  
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`    
