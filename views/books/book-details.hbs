@@ -1,36 +1,59 @@
 <h1>BOOK-DETAILS</h1>
 
-<a href="/books">Go Back</a>
+<form>
+    <input type="button" value="Go back!" onclick="history.back()">
+</form>
 
 <div class="d-flex flex-row p-3 m-2" style="width: 18rem;">
     <div>
-        <img src="{{image}}" class="" alt="book cover">
+        <img src="{{book.volumeInfo.imageLinks}}" class="" alt="book cover" style="max-width: 400px;">
     </div>
     <div style="width: 500px;">
         <div>
-            <h3 class="">{{title}}</h3>
+            <h3 class="">{{book.volumeInfo.title}}</h3>
             <label for="">Author(s): <h4 class="">
-                    {{#each authors}}
+                    {{#each book.volumeInfo.authors}}
                     {{this}} ,
                     {{/each}}
                 </h4></label>
-            <label for="">Genre:<h4 class="">{{genre}}</h4></label>
-            <label for="">Rating: <h5 class="">{{rating}}</h5></label>
-            <h5 class="">{{prices}} </h5>
-            <p class="">{{description}}</p>
-            <a href="#" class="btn btn-success">Add to my shelf</a>
+            <label for="">Categories:<h4 class="">
+                    {{#each book.volumeInfo.categories}}
+                    {{this}} ,
+                    {{/each}}
+                </h4></label>
+            <label for="">Average Rating: <h5 class="">{{book.volumeInfo.averageRating}}</h5></label>
+            <label for="">Price: <h5 class="">
+                {{book.volumeInfo.saleInfo.retailPrice.amount}}
+                {{book.volumeInfo.saleInfo.retailPrice.currencyCode}}
+            </h5></label>
+            
+            <label for="">Description: <p class="">{{book.volumeInfo.description}}</p></label>
+            <form action="/add-book/{{book.id}}/detail" method="post">
+                <button class="btn btn-success" type="submit">Add to my shelf</button>
+            </form>
         </div>
         <div class="container comments">
-            <div>
-                <p>user rating</p>
+            {{#each comments}}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{userId.username}} posted: </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
+                    <p class="card-text">{{comment}}</p>
+                </div>
             </div>
-            <div>
-                <p>user comments</p>
-            </div>
+            {{/each}}
         </div>
         <div>
-            <form action="">
-                <p>add comments</p>
+            <form action="/books/{{book.id}}/post-comment" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Ratings</label>
+                    <input type="number" class="form-control" name="rating" min="0" max="5">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Comment</label>
+                    <input type="text" class="form-control" name="comment">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>

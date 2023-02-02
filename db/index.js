@@ -7,24 +7,24 @@ const books = [
   {
     title: "Le deuxième sexe",
     authors: ["Simone de Beauvoir"],
-    genre: "Essai",
+    categories: ["Essai"],
     description:`Le Deuxième Sexe est un essai1 de Simone de Beauvoir, paru en 1949. Cet essai est divisé en deux tomes. Le Deuxième Sexe n'a pas été écrit dans un but militant. L'écrivaine a voulu produire une somme à la façon des encyclopédies : tout connaître, tout dire dans les moindres détails. Mais l'essai s'inscrit aussi dans un plus large projet autobiographique2.
 
     L'ouvrage s'inscrit dans un double cadre philosophique, celui de l'existentialisme et celui de la phénoménologie3,4. Ainsi, son essai n’est pas un simple constat sur la situation des femmes après la Seconde Guerre mondiale ; c’est une œuvre à teneur philosophique, riche de références littéraires, historiques, sociologiques, biologiques et médicales. Le credo qui paraît en filigrane tout au long des pages est bien qu'aucune femme n'a de destin tout tracé. Simone de Beauvoir, excluant tout déterminisme chez l’humain, s'intéresse donc autant à l'infériorisation de la femme en tant que fait, qu'à ses causes, qui ne sauraient venir de quelque ordre naturel. L'existentialisme implique aussi l'entière responsabilité humaine : ainsi, Beauvoir incrimine presque autant les femmes, dont elle dénonce la passivité, la soumission et le manque d’ambition, que les hommes, qu'elle accuse de sexisme, de lâcheté et parfois de cruauté. Elle estime en conséquence que le féminisme réussira grâce à la volonté solidaire des hommes et des femmes. Selon elle, les deux grands faits qui permettraient à la femme de s'émanciper sont le contrôle des naissances et l'accès au monde du travail.
     
     À sa sortie, l'ouvrage est violemment critiqué mais est néanmoins immédiatement un succès. Le Deuxième Sexe s’est vendu à plusieurs millions d'exemplaires dans le monde, traduit dans de nombreuses langues. Il reste à ce jour une référence majeure de la philosophie féministe.`, 
     image :"https://upload.wikimedia.org/wikipedia/commons/9/99/Le_deuxi%C3%A8me_sexe.jpg",
-    rating : 5,
-    price : 20,
+    averageRating : 5,
+    retailPrice : 20,
   }, 
   {
     title: "L'idot",
     authors: ["Fiodor Dostoïvsky"],
-    genre: "Roman",
+    categories: ["Roman"],
     description:`L'ouvrage s'inscrit dans un double cadre philosophique, celui de l'existentialisme et celui de la phénoménologie3,4. Ainsi, son essai n’est pas un simple constat sur la situation des femmes après la Seconde Guerre mondiale ; c’est une œuvre à teneur philosophique, riche de références littéraires, historiques, sociologiques, biologiques et médicales. Le credo qui paraît en filigrane tout au long des pages est bien qu'aucune femme n'a de destin tout tracé. Simone de Beauvoir, excluant tout déterminisme chez l’humain, s'intéresse donc autant à l'infériorisation de la femme en tant que fait, qu'à ses causes, qui ne sauraient venir de quelque ordre naturel. L'existentialisme implique aussi l'entière responsabilité humaine : ainsi, Beauvoir incrimine presque autant les femmes, dont elle dénonce la passivité, la soumission et le manque d’ambition, que les hommes, qu'elle accuse de sexisme, de lâcheté et parfois de cruauté. Elle estime en conséquence que le féminisme réussira grâce à la volonté solidaire des hommes et des femmes. Selon elle, les deux grands faits qui permettraient à la femme de s'émanciper sont le contrôle des naissances et l'accès au monde du travail.`, 
     image :"https://static.fnac-static.com/multimedia/Images/FR/NR/ae/49/00/18862/1507-1/tsp20201106070919/L-Idiot.jpg",
-    rating : 5,
-    price : 5,
+    averageRating : 5,
+    retailPrice : 5,
   },
   {
     title: "His dark materials",
@@ -55,7 +55,7 @@ mongoose
   .then((x) => {
     const databaseName = x.connections[0].name;
     console.log(`Connected to Mongo! Database name: "${databaseName}"`);
-    //  return Book.create(books); 
+    //return Book.create(books); 
   })
   .catch((err) => {
     console.error("Error connecting to mongo: ", err);

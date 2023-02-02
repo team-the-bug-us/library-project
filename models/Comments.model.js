@@ -1,15 +1,17 @@
 const { Schema, model } = require("mongoose");
 
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
-const ratingSchema = new Schema(
+const commentsSchema = new Schema(
   {
-    bookId:[{type : Schema.Types.ObjectId,ref:'Books' }],
-    userId:[{type : Schema.Types.ObjectId,ref:'User' }], 
+    bookId:String,
+    userId:{type : Schema.Types.ObjectId,ref:'User' }, 
     comment:{
       type : String
     }, 
     rating : {
-        type : String
+        type : Number,
+        max:5,
+        min:0,
       }
   
   },
@@ -20,4 +22,4 @@ const ratingSchema = new Schema(
 );
  
 
-module.exports = model("Ratings", ratingSchema);
+module.exports = model("Comments", commentsSchema);
