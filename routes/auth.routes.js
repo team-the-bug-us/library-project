@@ -49,8 +49,9 @@ router.get("/signup", (req, res, next) => {
 
 router.post("/signup", (req, res, next) => {
   
-  const {username, email, password, userType} = req.body
-  /* console.log(password) */
+  let {username, email, password, isAdmin} = req.body
+  isAdmin = (isAdmin==="on")? true:false
+ 
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   //email and password client inputs validation
   if(!username || !password){
@@ -66,7 +67,7 @@ router.post("/signup", (req, res, next) => {
   .then(salt => bcrypt.hash(password,salt))
   .then(hashedPassword => {
     /* console.log(hashedPassword) */
-    return Users.create({username:username,email:email,hashedPassword: hashedPassword,userType:userType})
+    return Users.create({username:username,email:email,hashedPassword: hashedPassword,isAdmin:isAdmin})
   })
   .then(user =>{
     req.session.currentUser = user

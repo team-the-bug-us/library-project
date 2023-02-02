@@ -4,6 +4,8 @@ const router = express.Router();
 const Users = require("../models/User.model");
 const { isLoggedIn, isLoggedOut } = require("../middlewares/route-guard");
 const axios = require('axios')
+
+ 
 /* GET home page */
 
 router.get("/profile", isLoggedIn, (req, res, next) => {

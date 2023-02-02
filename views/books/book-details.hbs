@@ -27,7 +27,7 @@
                 {{book.volumeInfo.saleInfo.retailPrice.currencyCode}}
             </h5></label>
             
-            <label for="">Description: <p class="">{{book.volumeInfo.description}}</p></label>
+            <label for="">Description: <p class="">{{book.volumeInfo.description}}</p></label> 
             <form action="/add-book/{{book.id}}/detail" method="post">
                 <button class="btn btn-success" type="submit">Add to my shelf</button>
             </form>
@@ -39,6 +39,15 @@
                     <h5 class="card-title">{{userId.username}} posted: </h5>
                     <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
                     <p class="card-text">{{comment}}</p>
+
+                    {{#if ../userInSession.isAdmin}}
+                    <form action="/delete-comment/{{_id}}" method="post"> 
+                    <button class ="btn btn-danger" type="submit" >x</button> 
+
+                    </form>
+
+
+                    {{/if}}
                 </div>
             </div>
             {{/each}}
