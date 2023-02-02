@@ -17,9 +17,8 @@
                     {{/each}}
                 </h4></label>
             <label for="">Categories:<h4 class="">
-                    {{#each book.volumeInfo.categories}}
-                    {{this}} ,
-                    {{/each}}
+                    <p>{{ book.volumeInfo.categories.[1]}}</p>
+                   
                 </h4></label>
             <label for="">Average Rating: <h5 class="">{{book.volumeInfo.averageRating}}</h5></label>
             <label for="">Price: <h5 class="">
@@ -27,7 +26,7 @@
                 {{book.volumeInfo.saleInfo.retailPrice.currencyCode}}
             </h5></label>
             
-            <label for="">Description: <p class="">{{book.volumeInfo.description}}</p></label> 
+            <label for="">Description: {{book.volumeInfo.description}}</label> 
             <form action="/add-book/{{book.id}}/detail" method="post">
                 <button class="btn btn-success" type="submit">Add to my shelf</button>
             </form>
