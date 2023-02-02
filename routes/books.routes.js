@@ -11,13 +11,15 @@ const fillingImgUrl = "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/myst
 router.get("/books/:id", (req, res, next) => {
   axios.get(`https://www.googleapis.com/books/v1/volumes/${req.params.id}`)
   .then(result => {
-    const book = result.data
+    const book = JSON.parse(JSON.stringify(result.data)) 
+
     //remove p tage from description
-    book.volumeInfo.description.replace("<p>","")
-    book.volumeInfo.description.replace("</p>","")
-    book.volumeInfo.description.replace("</i>","")
-    book.volumeInfo.description.replace("<i>","")
-    book.volumeInfo.description.replace("<br>","")
+    const removeP = book.volumeInfo.description.replaceAll("<p>","")
+    const remove2P = removeP.replaceAll("</p>","")
+    const remove2I = remove2P.replaceAll("</i>","")
+    const removeI = remove2I.replaceAll("<i>","")
+    const clean = removeI.replaceAll("<br>","")
+    book.volumeInfo.description = clean
     return book
     })
     .then(book => {
@@ -27,14 +29,15 @@ router.get("/books/:id", (req, res, next) => {
     }else{
       book.volumeInfo.imageLinks = fillingImgUrl
     }
-    console.log(book.volumeInfo.imageLinks)
+    //console.log(book.volumeInfo.imageLinks)
     
     Comments.find({bookId:req.params.id})
     .populate("userId")
     .then(comments => {
 /*       console.log(comments)*/ 
-      console.log(book) 
+      //console.log(book) 
       res.render("books/book-details", {book ,comments})
+
     })
     .catch(error=>console.log("there was an error with getting book details", error))
   })

@@ -70,7 +70,9 @@ router.post("/signup", (req, res, next) => {
     return Users.create({username:username,email:email,hashedPassword: hashedPassword,isAdmin:isAdmin})
   })
   .then(user =>{
-    req.session.currentUser = user
+    req.session.currentUser = user.toObject()
+    delete req.session.currentUser.hashedPassword
+    
     res.redirect(`/profile`)
   })
   .catch(err=>console.log(`error with the signup ${err}`))
