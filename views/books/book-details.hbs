@@ -39,7 +39,13 @@
                     <h5 class="card-title">{{userId.username}} posted: </h5>
                     <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
                     <p class="card-text">{{comment}}</p>
-                    {{#if userInSession.isAdmin}}
+
+                    {{#if ../userInSession.isAdmin}}
+                    <form action="/delete-comment/{{_id}}" method="post"> 
+                    <button class ="btn btn-danger" type="submit" >x</button> 
+
+                    </form>
+
 
                     {{/if}}
                 </div>

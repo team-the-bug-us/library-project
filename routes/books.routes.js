@@ -44,7 +44,18 @@ router.get("/books/:id", (req, res, next) => {
 router.post("/books/:id/post-comment", (req,res,next)=>{
   const {rating, comment} = req.body
   Comments.create({userId: req.session.currentUser._id, bookId:req.params.id, rating:rating, comment:comment })
-  .then(()=>res.redirect(`/books/${req.params.id}`))
+  .then(()=>res.redirect(`/books/${req.params}`))
+  .catch(error=>console.log("there was an error with creating comment", error))
+})
+
+router.post("/delete-comment/:id", (req,res,next)=>{
+  Comments.findById(req.params.id)
+  .then((comment)=>{
+    Comments.findByIdAndDelete(req.params.id)
+  .then(()=>{ 
+    res.redirect(`/books/${comment.bookId}`)})
+
+  })
   .catch(error=>console.log("there was an error with creating comment", error))
 })
 
