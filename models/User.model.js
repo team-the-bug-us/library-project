@@ -21,8 +21,8 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
-    userType:{
-      type : String
+    isAdmin:{
+      type : Boolean
     }, 
     books : [String]
   

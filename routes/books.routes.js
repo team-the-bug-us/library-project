@@ -15,6 +15,9 @@ router.get("/books/:id", (req, res, next) => {
     //remove p tage from description
     book.volumeInfo.description.replace("<p>","")
     book.volumeInfo.description.replace("</p>","")
+    book.volumeInfo.description.replace("</i>","")
+    book.volumeInfo.description.replace("<i>","")
+    book.volumeInfo.description.replace("<br>","")
     return book
     })
     .then(book => {
