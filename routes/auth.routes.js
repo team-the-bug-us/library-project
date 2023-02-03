@@ -71,8 +71,8 @@ router.post("/signup", (req, res, next) => {
   })
   .then(user =>{
     req.session.currentUser = user.toObject()
-    delete req.session.currentUser.hashedPassword
-    
+    delete req.session.currentUser.hashedPassword 
+
     res.redirect(`/profile`)
   })
   .catch(err=>console.log(`error with the signup ${err}`))
