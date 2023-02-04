@@ -4,6 +4,7 @@ const Users = require('../models/User.model')
 const asyncFor = require("../utils/asyncFor");
 const callbackFor = require("../utils/callbackFor");
 const rankBooks = require('../utils/rank-books')
+const bestBooks = require('../utils/best-ratings')
 /* GET home page */
 router.get("/", (req, res, next) => {
   let bookIds =[]
@@ -14,8 +15,9 @@ router.get("/", (req, res, next) => {
       bookIds = bookIds.concat(users[i].books)
 
     } 
-
-    console.log(rankBooks(bookIds))
+    bestBooks(bookIds)
+    bookIds = rankBooks(bookIds)
+    
     return asyncFor(bookIds, callbackFor, books);
   }) 
   .then(()=> res.render('index',{books}))
