@@ -1,7 +1,14 @@
 <body id="general-background" >
 <div id="home-page" >
-<img src="/images/LOGO-simple.png" alt="">
+{{!-- <img src="/images/LOGO-simple.png" alt=""> --}}
 
-</div>
+
+
+<ul>
+{{#each books}}
+<li style=" color:black">{{volumeInfo.title}}</li>
+{{/each}}
+</ul>
+
     
 </body>
