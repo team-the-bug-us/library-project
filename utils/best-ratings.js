@@ -3,10 +3,11 @@ const asyncFor = require("./asyncFor");
 const callbackFor = require("./callbackFor");
 
 
-module.exports =  (bookIds) => { 
+module.exports =  (bookIds) => { // issue with awaiting the asyncFor and then executing the rest
     let books =[]
     let uniqueBookIds = [...new Set(bookIds)] 
     asyncFor(uniqueBookIds, callbackFor, books)
+    
     console.log(books)
     let bestBooks = books.splice(0,5)
     console.log(bestBooks)
