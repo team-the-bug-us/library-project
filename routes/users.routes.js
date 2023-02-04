@@ -6,13 +6,20 @@ const { isLoggedIn, isLoggedOut } = require("../middlewares/route-guard");
 const axios = require('axios');
 const asyncFor = require("../utils/asyncFor");
 const callbackFor = require("../utils/callbackFor");
-
+const fileUploader = require('../config/cloudinary.config')
  
 /* GET home page */
 
 router.get("/profile", isLoggedIn, (req, res, next) => {
   res.render("user/my-profile", { userInSession: req.session.currentUser });
 });
+
+router.post("/profile/add-profile-image", fileUploader.single("profileImgUrl"), (req,res,next)=>{
+  console.log(req.file?.path)
+  Users.findByIdAndUpdate(req.session.currentUser._id, {profileImgUrl: req.file.path}, {new:true})
+  .then(()=>res.redirect("/profile"))
+  .catch(err=> console.log("Profile image upload err:",err))
+} )
 
 router.get("/profile/shelf", isLoggedIn, (req, res, next) => { 
   let books =[]
@@ -32,10 +39,8 @@ router.post("/add-book/:id", (req, res, next) => {
 
   Users.findById(req.session.currentUser._id).then((user) => {
     if (user.books.indexOf(req.params.id)>-1) { 
-      // let error = document.getElementById("error") 
-      // error.textContent = "Book already in Shelf"
-      // error.style.color = "red" 
-      res.redirect("/");  
+      userInSession.errMessage = "Book is already added to your shelf"
+      res.redirect(`/books/${req.params.id}`);  
       return
     } else {
       Users.findByIdAndUpdate(

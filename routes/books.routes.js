@@ -14,11 +14,14 @@ router.get("/books/:id", (req, res, next) => {
     const book = JSON.parse(JSON.stringify(result.data)) 
 
     //remove p tage from description
-    const removeP = book.volumeInfo.description.replaceAll("<p>","")
-    const remove2P = removeP.replaceAll("</p>","")
-    const remove2I = remove2P.replaceAll("</i>","")
-    const removeI = remove2I.replaceAll("<i>","")
-    const clean = removeI.replaceAll("<br>","")
+    // clean as intermediate variable to carry on replace string
+    let clean = book.volumeInfo.description.replaceAll("<p>","")
+    clean = clean.replaceAll("</p>","")
+    clean = clean.replaceAll("</i>","")
+    clean = clean.replaceAll("<i>","")
+    clean = clean.replaceAll("<br>","")
+    clean = clean.replaceAll("<b>","")
+    clean = clean.replaceAll("</b>","")
     book.volumeInfo.description = clean
     return book
     })
