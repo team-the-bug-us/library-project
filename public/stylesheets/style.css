@@ -1,14 +1,120 @@
+/* 
+
+colors: 
+- book : #6B4021 
+rgba(35, 35, 35, 0.7)
+*/
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
 }
 
+
 a {
-  color: #00b7ff;
+  color: rgb(184, 243, 245);
 }
 
 h1 {
   color: 15px;
 }
+
+
+#general-background {
+  background-image: url(/images/fond-bois.png) ;
+  background-position: 0 0; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 500px;
+    /* margin:-20px -20px 0 -20px; */
+}
+
+#home-page img{
+  width: 600px;
+  margin: 10% 0 0 30%;
+}
+
+.nav-bar {
+  background-color:  rgba(98, 51, 18, 0.4); 
+  height: 80px;
+  margin : -50px -50px 0 -50px; 
+
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around; 
+  align-items: center;
+}
+
+#logo img {
+  width: 90px;
+}
+
+#search-bar {
+  width: 800px;
+  margin-left: 5px;
+
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start; 
+  align-items: center;
+
+  font-size: 15px;
+}
+
+#search-bar input{
+  width: 400px;
+  height: 40px;
+  background-color: rgba(250, 235, 215, 0.727) ;
+  border: none;
+  border-radius: 10px 0 0px 10px ; 
+}
+
+button {
+  width: 100px;
+  height: 40px;
+  border: none;
+  background-color: rgba(184, 243, 245, 0.727);
+  color: #6B4021 ;
+  font-weight: bolder;
+
+}
+
+#search-bar button { 
+  border-radius: 0px 10px 10px 0px ; 
+  font-size: 15px;
+}
+
+#page-links button {  
+  border-radius: 10px;  
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+#page-links ul {
+  width: 600px;
+  list-style: none;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center ;
+
+}
+
+#page-links li {
+  width: 130px;  
+  padding : 0;
+
+}
+
+#page-links a { 
+  font-size: 20px;
+  color: rgb(184, 243, 245);
+  text-decoration : none ;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  
+}
+
 
 
