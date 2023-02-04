@@ -11,13 +11,15 @@ const fileUploader = require('../config/cloudinary.config')
 /* GET home page */
 
 router.get("/profile", isLoggedIn, (req, res, next) => {
-  res.render("user/my-profile", { userInSession: req.session.currentUser });
+  res.render("user/my-profile");
 });
 
 router.post("/profile/add-profile-image", fileUploader.single("profileImgUrl"), (req,res,next)=>{
-  console.log(req.file?.path)
+  
   Users.findByIdAndUpdate(req.session.currentUser._id, {profileImgUrl: req.file.path}, {new:true})
-  .then(()=>res.redirect("/profile"))
+  .then(user =>{
+    req.session.currentUser = user.toObject()
+    res.redirect("/profile")})
   .catch(err=> console.log("Profile image upload err:",err))
 } )
 
