@@ -5,9 +5,7 @@ const commentsSchema = new Schema(
   {
     bookId:String,
     userId:{type : Schema.Types.ObjectId,ref:'User' }, 
-    comment:{
-      type : String
-    }, 
+    comment:{ type : String}, 
     rating : {
         type : Number,
         max:5,

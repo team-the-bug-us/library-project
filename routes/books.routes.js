@@ -34,7 +34,7 @@ router.get("/books/:id", (req, res, next) => {
     Comments.find({bookId:req.params.id})
     .populate("userId")
     .then(comments => {
-/*       console.log(comments)*/ 
+       console.log(comments)
       //console.log(book) 
       res.render("books/book-details", {book ,comments})
 
@@ -42,17 +42,16 @@ router.get("/books/:id", (req, res, next) => {
     .catch(error=>console.log("there was an error with getting book details", error))
   })
 });
-
-
-router.post("/books/:id/post-comment", (req,res,next)=>{
-  const {rating, comment} = req.body
+ 
+router.post("/books/:id/post-comment", (req,res,next)=>{ 
+  const {rating, comment} = req.body  
   Comments.create({userId: req.session.currentUser._id, bookId:req.params.id, rating:rating, comment:comment })
-  .then(()=>res.redirect(`/books/${req.params}`))
+  .then(()=>res.redirect(`/books/${req.params.id}`))
   .catch(error=>console.log("there was an error with creating comment", error))
 })
 
 router.post("/delete-comment/:id", (req,res,next)=>{
-  Comments.findById(req.params.id)
+  Comments.findById(req.params.id) 
   .then((comment)=>{
     Comments.findByIdAndDelete(req.params.id)
   .then(()=>{ 
