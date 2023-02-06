@@ -1,31 +1,21 @@
-const Comments = require ('../models/Comments.model')
+const Comments = require("../models/Comments.model");
 const asyncFor = require("./asyncFor");
 const callbackFor = require("./callbackFor");
 
-
-module.exports =  (bookIds) => { // issue with awaiting the asyncFor and then executing the rest
-    let books =[]
-    let uniqueBookIds = [...new Set(bookIds)] 
-    asyncFor(uniqueBookIds, callbackFor, books)
-    
-    console.log(books)
-    let bestBooks = books.splice(0,5)
-    console.log(bestBooks)
-    
-    for(let i in books){
-        for(let j in bestBooks){
-            if(bestBooks[j].volumenInfo.averageRating > books[i].volumenInfo.averageRating){
-                bestBooks.splice(j,1,books[i])
-                continue
-            }
-        }
-    }
-    console.log(bestBooks)
-
-
-
-
-  
-
-
-  }
+module.exports = function (bookIds){
+  // issue with awaiting the asyncFor and then executing the rest
+  let books = [];
+  let uniqueBookIds = [...new Set(bookIds)];
+  let topRatedBooks =[]
+  asyncFor(uniqueBookIds, callbackFor, books)
+  .then(() => {
+    //filter out the book with no rating
+    books = books.filter(book=>book.volumeInfo.averageRating)
+  })
+  .then(()=>{
+    topRatedBooks = books.sort((a,b)=>b.volumeInfo.averageRating - a.volumeInfo.averageRating).splice(0,5)
+  })
+  .catch(err=>console.log("error on getting best rated 5 movies",err))
+  // watch out, unlike the top pick list, this array contains book
+  return topRatedBooks
+};
