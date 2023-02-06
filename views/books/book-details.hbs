@@ -33,6 +33,11 @@
             </h5></label>
             
             <label for="">Description: {{book.volumeInfo.description}}</label> 
+            <label for="">Bug-us sugests: 
+                {{#each sugestions}}
+                <form action="/books/?" method="post"><button type="submit">{{this}}</button></form>
+                {{/each}}
+            </label> 
 
         {{#if userInSession}}
             <form action="/add-book/{{book.id}}/detail" method="post">
