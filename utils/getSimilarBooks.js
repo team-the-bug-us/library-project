@@ -1,6 +1,9 @@
 const { Configuration, OpenAIApi } = require("openai");
+
+require('dotenv').config()
+
 const configuration = new Configuration({
-  apiKey: "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",
+  apiKey: process.env.OPENAI_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
@@ -23,3 +26,6 @@ module.exports = async function getSimilarBooks(bookName){
       });
 }
 
+/* getSimilarBooks("His dark material")
+.then(response => console.log(response.data.choices[0].text))
+.catch(err =>console.log("something is wrong with the open ai", err)) */
