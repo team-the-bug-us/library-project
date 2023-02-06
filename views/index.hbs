@@ -1,41 +1,7 @@
 <body id="general-background" >
 <div id="home-page" >
-{{!-- <img src="/images/LOGO-simple.png" alt=""> --}}
+<img src="/images/LOGO-simple.png" alt="">
 
-
- <div class="container d-flex flex-row flex-wrap p-3">
-
-{{#each books}} 
-
-
-<div class="card p-3 m-2" style="width: 250px;">
-    <img src="{{volumeInfo.imageLinks.thumbnail}}" class="card-img-top" alt="book cover" style="width:200px"/>
-    <div class="card-body">
-      <h3 class="card-title">{{volumeInfo.title}}</h3>
-    
-      
-      
-
-      <a href="/books/{{id}}" class="btn btn-success m-1">See book details</a>
-
-      <br>
-      {{#if ../userInSession}}
-      <form action="/add-book/{{id}}" method="post">
-        <button class="btn btn-success m-1" type="submit">Add to my shelf</button>
-      </form>
-      {{/if}}
-
-    </div>
-  </div>
-
-
-
-
-{{/each}}
-
- </div>
-
- 
-
+</div>
     
 </body>

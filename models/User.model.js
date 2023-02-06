@@ -9,7 +9,6 @@ const userSchema = new Schema(
       required: false,
       unique: true
     },
-    profileImgUrl: String,
     email: {
       type: String,
       required: true,
