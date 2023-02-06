@@ -3,12 +3,7 @@
 
 <form>
     <input type="button" value="Go back!" onclick="history.back()">
-<a href="/profile/shelf">Go to my shelf</a>
 </form>
-
-{{#if userInSession.errMessage}}
-    <article style="color:red">{{errMessage}}</article>
-{{/if}}
 
 <div class="d-flex flex-row p-3 m-2" style="width: 18rem;">
     <div>
@@ -23,7 +18,7 @@
                     {{/each}}
                 </h4></label>
             <label for="">Categories:<h4 class="">
-                    <p>{{book.volumeInfo.categories.[0]}}</p>
+                    <p>{{ book.volumeInfo.categories.[1]}}</p>
                    
                 </h4></label>
             <label for="">Average Rating: <h5 class="">{{book.volumeInfo.averageRating}}</h5></label>
@@ -33,11 +28,6 @@
             </h5></label>
             
             <label for="">Description: {{book.volumeInfo.description}}</label> 
-            <label for="">Bug-us sugests: {{sugestions}}
-{{!--                 {{#each sugestions}}
-                <form action="/books/?" method="post"><button type="submit">{{this}}</button></form>
-                {{/each}} --}}
-            </label> 
 
         {{#if userInSession}}
             <form action="/add-book/{{book.id}}/detail" method="post">
