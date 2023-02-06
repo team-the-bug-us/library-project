@@ -5,16 +5,19 @@ const Books = require("../models/Books.model")
 const Comments = require("../models/Comments.model")
 const axios = require("axios");
 const fillingImgUrl = "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/mystery-book-cover-design-template-a5dce61a0c99630dedab42e3a4c15618_screen.jpg?ts=1637014687"
-
+const sugestSimilarBooks = require("../utils/getSimilarBooks")
 /* GET home page */
 
-router.get("/books/:id", (req, res, next) => {
+// new getbook page with sugestions: 
+
+ router.get("/books/:id", (req, res, next) => {
+  let sugestions
+  let book
   axios.get(`https://www.googleapis.com/books/v1/volumes/${req.params.id}`)
   .then(result => {
-    const book = JSON.parse(JSON.stringify(result.data)) 
-
-    //remove p tage from description
-    // clean as intermediate variable to carry on replace string
+    book = result.data
+    //remove p tags from description
+    //clean as intermediate variable to carry on replace string
     let clean = book.volumeInfo.description.replaceAll("<p>","")
     clean = clean.replaceAll("</p>","")
     clean = clean.replaceAll("</i>","")
@@ -23,28 +26,34 @@ router.get("/books/:id", (req, res, next) => {
     clean = clean.replaceAll("<b>","")
     clean = clean.replaceAll("</b>","")
     book.volumeInfo.description = clean
-    return book
     })
-    .then(book => {
-    const imageLinks = book.volumeInfo.imageLinks
-    if(imageLinks){
-    book.volumeInfo.imageLinks = imageLinks.extraLarge || imageLinks.large || imageLinks.medium ||  imageLinks.small ||  imageLinks.thumbnail ||  imageLinks.smallThumbnail
-    }else{
-      book.volumeInfo.imageLinks = fillingImgUrl
-    }
-    //console.log(book.volumeInfo.imageLinks)
-    
-    Comments.find({bookId:req.params.id})
-    .populate("userId")
-    .then(comments => {
-       console.log(comments)
-      //console.log(book) 
-      res.render("books/book-details", {book ,comments})
-
+    .then(() =>{
+      sugestSimilarBooks(book.volumeInfo.title)
+      .then(response => {
+        sugestions = response.data.choices[0].text
+        console.log(sugestions)
+      })
+      .then(() => {
+        const imageLinks = book.volumeInfo.imageLinks
+        if(imageLinks){
+        book.volumeInfo.imageLinks = imageLinks.extraLarge || imageLinks.large || imageLinks.medium ||  imageLinks.small ||  imageLinks.thumbnail ||  imageLinks.smallThumbnail
+        }else{
+          book.volumeInfo.imageLinks = fillingImgUrl
+        }
+        //console.log(book.volumeInfo.imageLinks)
+        Comments.find({bookId:req.params.id})
+        .populate("userId")
+        .then(comments => {
+          //console.log(book) 
+          res.render("books/book-details", {book, sugestions,comments})
+        })
+        .catch(error=>console.log("there was an error with getting book details: ", error))
+      })
     })
-    .catch(error=>console.log("there was an error with getting book details", error))
-  })
 });
+ 
+
+
  
 router.post("/books/:id/post-comment", (req,res,next)=>{ 
   const {rating, comment} = req.body  

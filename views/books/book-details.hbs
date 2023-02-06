@@ -33,10 +33,10 @@
             </h5></label>
             
             <label for="">Description: {{book.volumeInfo.description}}</label> 
-            <label for="">Bug-us sugests: 
-                {{#each sugestions}}
+            <label for="">Bug-us sugests: {{sugestions}}
+{{!--                 {{#each sugestions}}
                 <form action="/books/?" method="post"><button type="submit">{{this}}</button></form>
-                {{/each}}
+                {{/each}} --}}
             </label> 
 
         {{#if userInSession}}
