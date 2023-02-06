@@ -48,7 +48,7 @@ const books = [
 // If no env has been set, we dynamically set it to whatever the folder name was upon the creation of the app
 
 const MONGO_URI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/library-project";
+  process.env.MONGODB_URI || "mongodb+srv://Shengwei:Azerty1@bug-us.b4jh0zn.mongodb.net/bug-us?retryWrites=true&w=majority";
 
 mongoose
   .connect(MONGO_URI)

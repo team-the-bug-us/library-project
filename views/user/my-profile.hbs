@@ -1,6 +1,16 @@
 <body id="general-background" >
 <h1>MY PROFILE</h1>
-<p>{{username}}</p>
+
+<img src="{{userInSession.profileImgUrl}}" alt="profile image">
+<p>{{userInSession.username}}</p>
 <a href="/profile/shelf">See my BEAUTIFUL & WARM Shelf</a>
     
+
+<form action="/profile/add-profile-image" method="post" enctype="multipart/form-data">
+
+    <input type="file" name="profileImgUrl" />
+    <button type="submit">Submit</button>
+
+</form>
+
 </body>
