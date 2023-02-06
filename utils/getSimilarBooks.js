@@ -12,10 +12,10 @@ module.exports = async function getSimilarBooks(bookName){
         model: "text-davinci-003",
         prompt: `Recommand similar books.\n\n
         Harry potter: Lord of the rings,the Hobbit, Nania 
-        \nthe Eternal husband: Family happiness, the idiot 
-        \nDaddy long legs: Little women, Pride and prejudice  
+        \n the Eternal husband: Family happiness, the idiot 
+        \n Daddy long legs: Little women, Pride and prejudice  
         \n Brave new world: Animal farm, 1984 
-        \n ${bookName}: `,
+        \n ${bookName}: `, 
         temperature: 1,
         max_tokens: 60,
         top_p: 1.0,
@@ -25,6 +25,6 @@ module.exports = async function getSimilarBooks(bookName){
       });
 }
 
-/* getSimilarBooks("His dark material")
-.then(response => console.log(response.data.choices[0].text))
+/* getSimilarBooks("l'idiot")
+.then(response => console.log(response.data))
 .catch(err =>console.log("something is wrong with the open ai", err)) */
