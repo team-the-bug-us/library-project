@@ -2,7 +2,7 @@
 // https://www.npmjs.com/package/mongoose
 const mongoose = require("mongoose");
 const Book = require("../models/Books.model")
-
+/* 
 const books = [
   {
     title: "Le deuxième sexe",
@@ -42,13 +42,12 @@ const books = [
     price : 30,
   }
 ]
-
+ */
 
 // ℹ️ Sets the MongoDB URI for our app to have access to it.
 // If no env has been set, we dynamically set it to whatever the folder name was upon the creation of the app
 
-const MONGO_URI =
-  process.env.MONGODB_URI || "mongodb+srv://Shengwei:Azerty1@bug-us.b4jh0zn.mongodb.net/bug-us?retryWrites=true&w=majority";
+const MONGO_URI = process.env.MONGODB_URI;
 
 mongoose
   .connect(MONGO_URI)
