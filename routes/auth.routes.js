@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const { application } = require('express');
 const saltRounds = 10
 const fileUploader = require('../config/cloudinary.config');
-
+const randomProfileImageSrc = require('../utils/randomProfileImageSrc')
 
 /* GET home page */
 
@@ -68,7 +68,7 @@ router.post("/signup", fileUploader.single("profileImgUrl"),(req, res, next) => 
   .then(salt => bcrypt.hash(password,salt))
   .then(hashedPassword => {
     console.log(req.file)
-    return Users.create({username:username,profileImgUrl:req.file?.path,email:email,hashedPassword: hashedPassword,isAdmin:isAdmin})
+    return Users.create({username:username,profileImgUrl:req.file?.path || randomProfileImageSrc(),email:email,hashedPassword: hashedPassword,isAdmin:isAdmin})
   })
   .then(user =>{
     req.session.currentUser = user.toObject()
