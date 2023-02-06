@@ -1,4 +1,4 @@
-module.exports = (bookIds)=>{
+module.exports = function (bookIds){
     const top5 = []
     const bookCount = bookIds.reduce(function (acc, curr) {
         return acc[curr] ? acc[curr]++ : acc[curr] = 1, acc
