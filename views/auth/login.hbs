@@ -1,26 +1,36 @@
 <body id="general-background">
-  <h1>LOGIN</h1>
 
+  <section id="signin">
+ 
+<form class="identification" action="/login" method="post">
+        <h1>Log In</h1>
+        <div>
+          <div>
+            <input
+              type="email"
+              aria-describedby="emailHelp"
+              name="email"
+              placeholder="   Username"
+            />
+          </div>
+          <div>
+            <input type="password" name="password" placeholder="   Password" />
+          </div>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
 
-<form action="/login" method="post">
-  <div class="mb-3">
-    <label class="form-label" >Email address</label>
-    <input type="email" class="form-control"  aria-describedby="emailHelp" name="email">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div> 
-  <div class="mb-3">
-    <label class="form-label" >password</label>
-    <input type="password" class="form-control" name="password">
-  </div> 
-  </div> 
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+      <div class="signup">
+        <p>If you don't have an account yet, please:</p>
+        <button> <a href="/signup">Sign up</a></button>
 
-<br>
-<h4>If you don't have an account yet, use this link to: <a href="/signup">Sign up</a></h4>
+      </div>
+ 
+  </section>
 
-     
-
-<h2 class="text-danger">{{errorMessage}}</h2>
+{{#if errorMessage}}
+  <section id="errorMessage">  
+      <p >{{errorMessage}}</p>
+  </section>
+{{/if}}
 </body>
-
