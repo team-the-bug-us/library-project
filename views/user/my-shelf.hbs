@@ -1,40 +1,50 @@
 <body id="general-background">
-    <h1>MY SHELF</h1>
-<p>this is {{user.username}}'s shelf</p>
-<video src="">
-    <source src="https://www.youtube.com/watch?v=L_LUpnjgPso" type="video">
-</video>
 
-<div class="container d-flex flex-row p-3">
-    {{#each books}}
-    <div class="card p-3 m-2" style="width: 18rem;">
-        <img src="{{volumeInfo.imageLinks.thumbnail}}" class="card-img-top" alt="book cover" />
-        <div class="card-body">
-            <h3 class="card-title">{{volumeInfo.title}}</h3>
-            <label for="">Author(s):
-                <h4 class="card-subtitle">
-                    {{#each volumeInfo.authors}}
-                    {{this}}
-                    ,
-                    {{/each}}
-                </h4>
-            </label>
-            <label for="">Categories:<h4 class="card-subtitle">
+  <div class="shelf-page">
+    <section id="video">
+      <div>
+        <img src="{{userInSession.profileImgUrl}}" alt="profile image" />
+        <h1>{{userInSession.username}}'s Shelf </h1>
+      </div>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/L_LUpnjgPso"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
 
-                    <p>{{volumeInfo.categories.[1]}}</p>
+    </section>
 
-                </h4></label>
-            <label for="">Rating: <h5 class="card-subtitle">{{volumeInfo.averageRating}}</h5></label>
-            <h5 class="card-subtitle">{{volumeInfo.retailPrice.amount}} {{volumeInfo.retailPrice.currencyCode}}</h5>
+    <div class="myShelf">
+      {{#each books}}
 
-            {{!-- <p class="card-text">{{description}}</p> --}}
-            <a href="/books/{{id}}" class="btn btn-primary">See book details</a>
+        <div class="book-card">
+          <div class="book-image">
+            <img src="{{volumeInfo.imageLinks.thumbnail}}" alt="book cover" />
+          </div>
+
+          <div class="book-description">
+            <h3>{{volumeInfo.title}}</h3>
+
+          </div>
+          <div class="buttons">
+            <button class="blue-btn"><a href="/books/{{id}}">See book details</a></button>
+
+            <br />
             <form action="/delete-book/{{id}}" method="post">
-                <button class="btn btn-danger" type="submit">Delete</button>
+              <button class="brown-btn" type="submit">Delete</button>
             </form>
-        </div>
-    </div>
-    {{/each}}
-</div>
-</body>
 
+          </div>
+
+        </div>
+
+      {{/each}}
+    </div>
+
+  </div>
+
+</body>

@@ -1,16 +1,35 @@
-<body id="general-background" >
-<h1>MY PROFILE</h1>
+<body id="general-background">
 
-<img src="{{userInSession.profileImgUrl}}" alt="profile image">
-<p>{{userInSession.username}}</p>
-<a href="/profile/shelf">See my BEAUTIFUL & WARM Shelf</a>
-    
+  <section id="profile-page">
+    <div id="profile-picture">
+      <img src="{{userInSession.profileImgUrl}}" alt="profile image" />
+      <form
+        action="/profile/add-profile-image"
+        method="post"
+        enctype="multipart/form-data"
+      >
 
-<form action="/profile/add-profile-image" method="post" enctype="multipart/form-data">
+        <input type="file" id="file" name="profileImgUrl" class="inputFile"/>
+        <label for="file">Choose a picture</label>
+        <button type="submit" class="blue-btn">Send</button>
 
-    <input type="file" name="profileImgUrl" />
-    <button type="submit">Submit</button>
+      </form>
+    </div>
 
-</form>
+    <div id="profile-info">
+
+      <h2>Dear <b> {{userInSession.username}}</b>, </h2>
+      <p>you are connected to your library <b>The Bug-us.</b>  </p>
+      <ul>
+        <li>Explore new books with the Search-Bar</li>
+        <li>Add your favorite books to your shelf</li>
+        <li>And share your opinion on the books you read</li>
+      </ul>
+      <button class="brown-btn"><a href="/profile/shelf">Enter my shelf
+        </a></button>
+
+    </div>
+
+  </section>
 
 </body>

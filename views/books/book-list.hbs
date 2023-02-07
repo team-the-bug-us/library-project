@@ -1,43 +1,32 @@
-<body id="general-background">
-    <h1>BOOK-LIST</h1>
+<body id="general-background"> 
 
-<div class="container d-flex flex-row flex-wrap p-3">
-  {{#each items}}
-  <div class="card p-3 m-2" style="width: 18rem;">
-    <img src="{{volumeInfo.imageLinks}}" class="card-img-top" alt="book cover" />
-    <div class="card-body">
-      <h3 class="card-title">{{volumeInfo.title}}</h3>
-      <label for="">Author(s):
-        <h4 class="card-subtitle">
-          {{#each volumeInfo.authors}}
-          {{this}}
-          ,
-          {{/each}}
-        </h4>
-      </label>
-      <label for="">Categories:<h4 class="card-subtitle">
-          <p>
-            {{volumeInfo.categories.[0]}}
+<div  class="shelf">
+  {{#each items}} 
 
-          </p>
+ <div class="book-card">
+  <div class="book-image">
+    <img src="{{volumeInfo.imageLinks}}" alt="book cover" />
+  </div>
+    
+    <div class="book-description">
+      <h3 >{{volumeInfo.title}}</h3> 
 
-        </h4></label>
-      <label for="">Rating: <h5 class="card-subtitle">{{volumeInfo.averageRating}}</h5></label>
-      <h5 class="card-subtitle">{{volumeInfo.retailPrice.amount}} {{volumeInfo.retailPrice.currencyCode}}</h5>
-
-
-      <a href="/books/{{id}}" class="btn btn-success m-1">See book details</a>
+    </div>
+    <div class="buttons">
+      <button class="brown-btn"><a href="/books/{{id}}" >See book details</a></button>
+      
 
       <br>
       {{#if ../userInSession}}
       <form action="/add-book/{{id}}" method="post">
-        <button class="btn btn-success m-1" type="submit">Add to my shelf</button>
+        <button type="submit" >Add to my shelf</button>
       </form>
       {{/if}}
 
     </div>
+
   </div>
+
   {{/each}}
 </div>
 </body>
-
