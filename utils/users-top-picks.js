@@ -4,7 +4,7 @@ module.exports = function (bookIds){
         return acc[curr] ? acc[curr]++ : acc[curr] = 1, acc
       }, {});
     delete bookCount["0"]
-    console.log(bookCount)
+    //console.log(bookCount)
     Object.entries(bookCount).forEach(([key, value]) => {
       if(top5.length<5){
         top5.push({id:key,count:value})
@@ -16,6 +16,7 @@ module.exports = function (bookIds){
           }
         }
       }
+      top5.sort((a,b)=>b.count - a.count )
     });
     return top5.map(obj=>obj.id)
   }
