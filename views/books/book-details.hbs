@@ -1,0 +1,76 @@
+<body id="general-background">
+    <h1>BOOK-DETAILS</h1>
+
+<form>
+    <input type="button" value="Go back!" onclick="history.back()">
+</form>
+
+<div class="d-flex flex-row p-3 m-2" style="width: 18rem;">
+    <div>
+        <img src="{{book.volumeInfo.imageLinks}}" class="" alt="book cover" style="max-width: 400px;">
+    </div>
+    <div style="width: 500px;">
+        <div>
+            <h3 class="">{{book.volumeInfo.title}}</h3>
+            <label for="">Author(s): <h4 class="">
+                    {{#each book.volumeInfo.authors}}
+                    {{this}} ,
+                    {{/each}}
+                </h4></label>
+            <label for="">Categories:<h4 class="">
+                    <p>{{ book.volumeInfo.categories.[1]}}</p>
+                   
+                </h4></label>
+            <label for="">Average Rating: <h5 class="">{{book.volumeInfo.averageRating}}</h5></label>
+            <label for="">Price: <h5 class="">
+                {{book.volumeInfo.saleInfo.retailPrice.amount}}
+                {{book.volumeInfo.saleInfo.retailPrice.currencyCode}}
+            </h5></label>
+            
+            <label for="">Description: {{book.volumeInfo.description}}</label> 
+
+        {{#if userInSession}}
+            <form action="/add-book/{{book.id}}/detail" method="post">
+                <button class="btn btn-success" type="submit">Add to my shelf</button>
+            </form>
+        {{/if}}
+        </div>
+        <div class="container comments">
+            {{#each comments}}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{userId.username}} posted: </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
+                    <p class="card-text">{{comment}}</p>
+
+                    {{#if ../userInSession.isAdmin}}
+                    <form action="/delete-comment/{{_id}}" method="post"> 
+                    <button class ="btn btn-danger" type="submit" >x</button> 
+
+                    </form>
+
+
+                    {{/if}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{#if userInSession}}
+        <div>
+            <form action="/books/{{book.id}}/post-comment" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Ratings</label>
+                    <input type="number" class="form-control" name="rating" min="0" max="5">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Comment</label>
+                    <input type="text" class="form-control" name="comment">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        {{/if}}
+    </div>
+</div>
+</body>
+
