@@ -30,9 +30,7 @@ router.get("/", (req, res, next) => {
   .then(()=> res.render('index',{topPickedBooks:topPickedBooks,topRatedBooks:topRatedBooks}))
   .catch(err=>console.log('error with the async function for carousel :', err))
 
- 
 });
-
 
 
 router.get("/about-us", (req, res, next) => {
