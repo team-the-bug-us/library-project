@@ -7,7 +7,6 @@ const topPicked= require('../utils/users-top-picks')
 const topRated = require('../utils/best-ratings')
 /* GET home page */
 
-
 router.get("/", (req, res, next) => {
   let bookIds =[]
   const topPickedBooks=[]
@@ -31,6 +30,7 @@ router.get("/", (req, res, next) => {
   })
 
 });
+
 
 
 router.get("/about-us", (req, res, next) => {
