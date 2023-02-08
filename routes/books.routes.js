@@ -34,11 +34,17 @@ const sugestSimilarBooks = require("../utils/getSimilarBooks")
         console.log(sugestions)
       })
       .then(() => {
-        const imageLinks = book.volumeInfo.imageLinks
-        if(imageLinks){
-        book.volumeInfo.imageLinks = imageLinks.extraLarge || imageLinks.large || imageLinks.medium ||  imageLinks.small ||  imageLinks.thumbnail ||  imageLinks.smallThumbnail
-        }else{
-          book.volumeInfo.imageLinks = fillingImgUrl
+        const imageLinks = book.volumeInfo.imageLinks;
+        if (imageLinks) {
+          book.volumeInfo.imageLinks =
+            imageLinks.extraLarge ||
+            imageLinks.large ||
+            imageLinks.medium ||
+            imageLinks.small ||
+            imageLinks.thumbnail ||
+            imageLinks.smallThumbnail;
+        } else {
+          book.volumeInfo.imageLinks = fillingImgUrl;
         }
         //console.log(book.volumeInfo.imageLinks)
         Comments.find({bookId:req.params.id})

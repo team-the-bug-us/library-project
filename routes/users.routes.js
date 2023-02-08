@@ -7,6 +7,7 @@ const axios = require("axios");
 const asyncFor = require("../utils/asyncFor");
 const callbackFor = require("../utils/callbackFor");
 const fileUploader = require("../config/cloudinary.config");
+const fillingImgUrl = "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/mystery-book-cover-design-template-a5dce61a0c99630dedab42e3a4c15618_screen.jpg?ts=1637014687"
 
 /* GET home page */
 

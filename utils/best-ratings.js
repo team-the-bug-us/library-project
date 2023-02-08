@@ -1,13 +1,13 @@
-const Comments = require("../models/Comments.model");
 const asyncFor = require("./asyncFor");
 const callbackFor = require("./callbackFor");
 
-module.exports = function (bookIds){
+module.exports = async function (bookIds){
   // issue with awaiting the asyncFor and then executing the rest
   let books = [];
   let uniqueBookIds = [...new Set(bookIds)];
-  let topRatedBooks =[]
-  asyncFor(uniqueBookIds, callbackFor, books)
+  let topRatedBooks
+  await asyncFor(uniqueBookIds, callbackFor, books)
+
   .then(() => {
     //filter out the book with no rating
     books = books.filter(book=>book.volumeInfo.averageRating)

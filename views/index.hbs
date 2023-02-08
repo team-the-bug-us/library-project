@@ -1,43 +1,72 @@
-<body id="general-background" > 
+<body id="general-background">
 
-<div id="home-page">
+  <div id="home-page">
 
-<h2>Top five books added to our Users' Shelves</h2>
-<div  class="shelf">
+    <h2>Top five books added to our Users' Shelves</h2>
+    <div class="shelf">
 
-  {{#each books}} 
+      {{#each topPickedBooks}}
 
- <div class="book-card">
-  <div class="book-image">
-    <img src="{{volumeInfo.imageLinks.thumbnail}}" alt="book cover" />
-  </div>
-    
-    <div class="book-description">
-      <h3 >{{volumeInfo.title}}</h3> 
+      <div class="book-card">
+        <div class="book-image">
+          <img src="{{volumeInfo.imageLinks.thumbnail}}" alt="book cover" />
+        </div>
 
+        <div class="book-description">
+          <h3>{{volumeInfo.title}}</h3>
+
+        </div>
+        <div class="buttons">
+          <button class="brown-btn"><a href="/books/{{id}}">See book details</a></button>
+
+          <br>
+          {{#if ../userInSession}}
+          <form action="/add-book/{{id}}" method="post">
+            <button type="submit">Add to my shelf</button>
+          </form>
+          {{/if}}
+
+
+        </div>
+
+      </div>
+
+      {{/each}}
     </div>
-    <div class="buttons">
-      <button class="brown-btn"><a href="/books/{{id}}" >See book details</a></button>
-      
 
-      <br>
-      {{#if ../userInSession}}
-      <form action="/add-book/{{id}}" method="post">
-        <button type="submit" >Add to my shelf</button>
-      </form>
-      {{/if}}
+    <h2>Top five books with best Google ratings</h2>
+    <div class="shelf">
 
+      {{#each topRatedBooks}}
+
+      <div class="book-card">
+        <div class="book-image">
+          <img src="{{volumeInfo.imageLinks.thumbnail}}" alt="book cover" />
+        </div>
+
+        <div class="book-description">
+          <h3>{{volumeInfo.title}}</h3>
+
+        </div>
+        <div class="buttons">
+          <button class="brown-btn"><a href="/books/{{id}}">See book details</a></button>
+
+
+          <br>
+          {{#if ../userInSession}}
+          <form action="/add-book/{{id}}" method="post">
+            <button type="submit">Add to my shelf</button>
+          </form>
+          {{/if}}
+
+
+        </div>
+
+      </div>
+
+      {{/each}}
     </div>
 
   </div>
-
-  {{/each}}
-</div>
-
-</div>
-
- 
-
-    
 </body>
 
