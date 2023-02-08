@@ -23,12 +23,12 @@ router.get("/", (req, res, next) => {
   })
   .then(bookIds=> {
     console.log(bookIds)
-    topRatedBooks = topRated(bookIds)
-    console.log(topRatedBooks)
+    topRated(bookIds)
+    .then(books => topRatedBooks = books)
+    .then(() => asyncFor(topPickedBookIds, callbackFor, topPickedBooks))
+    .then(()=> res.render('index',{topPickedBooks:topPickedBooks,topRatedBooks:topRatedBooks}))
+    .catch(err=>console.log('error with the async function for carousel :', err))
   })
-  .then(() => asyncFor(topPickedBookIds, callbackFor, topPickedBooks))
-  .then(()=> res.render('index',{topPickedBooks:topPickedBooks,topRatedBooks:topRatedBooks}))
-  .catch(err=>console.log('error with the async function for carousel :', err))
 
 });
 

@@ -5,7 +5,7 @@ module.exports = async function (bookIds){
   // issue with awaiting the asyncFor and then executing the rest
   let books = [];
   let uniqueBookIds = [...new Set(bookIds)];
-  let topRatedBooks =[]
+  let topRatedBooks
   await asyncFor(uniqueBookIds, callbackFor, books)
   .then(() => {
     //filter out the book with no rating
