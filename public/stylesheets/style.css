@@ -172,16 +172,64 @@ button {
 
   flex-direction: column ;
 }
-.book-description h3 {
+/* .book-title h3 {
   font-size: 100%;
   font-weight: bolder; 
   padding:5px ;
   display: flex;
-  justify-content: center;
-  align-content: center;
+  justify-content: flex-start;
+  align-content: flex-start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  max-width: 200px;
+} */
 
+
+.book-title h3{
+  font-size: 100%;
+  font-weight: bolder; 
+  padding:5px ;
+  margin-top: 0em;
+  justify-content: flex-start;
+  text-align: center;
+  display:inline-block; /* important */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
- 
+
+.book-title, .running-title{
+  -webkit-transition: 3.3s;
+  -moz-transition: 3.3s;
+  transition: 3.3s;     
+  
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  transition-timing-function: linear;
+}
+
+
+.book-title{
+  overflow: hidden;
+  width: 160px;
+}
+
+
+.booktitle h3:hover{
+  text-decoration: none;
+}
+
+.running-title{
+  margin-left: 0em;   
+}
+
+.book-title:hover .running-title{
+  margin-left: -300px;
+}
+
+
+
 .buttons {
   height: 20%;
   padding: 5px;
