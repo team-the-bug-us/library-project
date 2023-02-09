@@ -1,72 +1,97 @@
 <body id="general-background">
-    <h1>BOOK-DETAILS</h1>
-
-<form>
-    <input type="button" value="Go back!" onclick="history.back()">
-<a href="/profile/shelf">Go to my shelf</a>
-</form>
-
-{{#if userInSession.errMessage}}
-    <article style="color:red">{{errMessage}}</article>
-{{/if}}
-
-<div class="d-flex flex-row p-3 m-2" style="width: 18rem;">
-    <div>
-        <img src="{{book.volumeInfo.imageLinks}}" class="" alt="book cover" style="max-width: 400px;">
+ 
+<div  id="bookDetailPage" >
+    <div id="bookDetailImage">
+        <form>
+        <button> <input class="blue-btn" type="button" value="Go back!" onclick="history.back()"></button> 
+        <button class="brown-btn"> <a href="/profile/shelf"  >Go to my shelf</a></button>
+    </form>
+        <img src="{{book.volumeInfo.imageLinks}}" class="" alt="book cover"  >
     </div>
-    <div style="width: 500px;">
-        <div>
-            <h3 class="">{{book.volumeInfo.title}}</h3>
-            <label for="">Author(s): <h4 class="">
-                    {{#each book.volumeInfo.authors}}
-                    {{this}} ,
-                    {{/each}}
-                </h4></label>
-            <label for="">Categories:<h4 class="">
-                    <p>{{book.volumeInfo.categories.[0]}}</p>
-                   
-                </h4></label>
-            <label for="">Average Rating: <h5 class="">{{book.volumeInfo.averageRating}}</h5></label>
-            <label for="">Price: <h5 class="">
-                {{book.volumeInfo.saleInfo.retailPrice.amount}}
-                {{book.volumeInfo.saleInfo.retailPrice.currencyCode}}
-            </h5></label>
+    <div id="bookDetailsAndComments">
+        <h2 class="">{{book.volumeInfo.title}}</h2>
+        <div id="bookDetails">
+
+
             
-            <label for="">Description: {{book.volumeInfo.description}}</label> 
-            <label for="">Bug-us sugests: {{sugestions}}
-{{!--                 {{#each sugestions}}
-                <form action="/books/?" method="post"><button type="submit">{{this}}</button></form>
-                {{/each}} --}}
-            </label> 
+                 <p> <b>Author(s):</b>
+                     
+                        {{#each book.volumeInfo.authors}}
+                        {{#if @last}}
+
+                    {{this}}
+                        {{else}}
+
+                    {{this}},
+                        {{/if}}
+                    {{/each}}
+                     </p>
+                    
+                 
+                <p><b>Categories:</b>{{book.volumeInfo.categories.[0]}}</p>
+                <p><b>Average Rating:</b>{{book.volumeInfo.averageRating}}</p>
+                <p><b>Price:</b>{{book.volumeInfo.saleInfo.retailPrice.amount}}
+                {{book.volumeInfo.saleInfo.retailPrice.currencyCode}}</p>
+                <p><b>Description:</b>{{book.volumeInfo.description}}</p>
 
         {{#if userInSession}}
             <form action="/add-book/{{book.id}}/detail" method="post">
-                <button class="btn btn-success" type="submit">Add to my shelf</button>
+                <button   type="submit">Add to my shelf</button>
             </form>
         {{/if}}
+                <p><b>Bug-us sugests: </b>{{sugestions}}</p>
+                {{!-- <p><b>Bug-us sugests: 
+                {{#each sugestions}}
+                <form action="/search-results" method="post">
+                <input type="hidden" name="keywords" value="{{this}}">
+                <button type="submit" style="display:inline; background:none;border:none;color:blue;text-decoration:underline;cursor:pointer;">{{this}}</button>
+                </form>,
+                {{/each}}</p> --}}
+                    
+        
+
         </div>
-        <div class="container comments">
+        <div id="comments">
             {{#each comments}}
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">{{userId.username}} posted: </h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
-                    <p class="card-text">{{comment}}</p>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">- {{userId.username}} posted - </h5>
+                        <h6 class="card-text"><b>User rating:</b>  {{rating}}</h6>
+                        <p class="card-text"><b>Comment:</b> {{comment}}</p>
 
-                    {{#if ../userInSession.isAdmin}}
-                    <form action="/delete-comment/{{_id}}" method="post"> 
-                    <button class ="btn btn-danger" type="submit" >x</button> 
+                        {{#if ../userInSession.isAdmin}}
+                        <form action="/delete-comment/{{_id}}" method="post"> 
+                        <button class ="btn" type="submit" >x</button> 
 
-                    </form>
+                        </form>
 
 
-                    {{/if}}
+                        {{/if}}
+                    </div>
                 </div>
-            </div>
             {{/each}}
+            {{#if userInSession}}
+            <div class="card">
+
+            <form class="card-body" action="/books/{{book.id}}/post-comment" method="post">
+            <h5 class="card-title"> Add my own comment</h5>
+                <div class="card-text">
+                    <label class="form-label">Ratings</label>
+                    <input type="number" class="form-control" name="rating" min="0" max="5">
+                </div>
+                <div class="card-text">
+                    <label class="form-label">Comment</label>
+                    <input type="text" class="form-control" name="comment">
+                </div>
+                <button class ="btn" type="submit" >Submit</button>
+            </form>
+
+            </div>
+            {{/if}}
+
         </div>
-        {{#if userInSession}}
-        <div>
+        {{!-- <div id="addComments">
+             {{#if userInSession}}
             <form action="/books/{{book.id}}/post-comment" method="post">
                 <div class="mb-3">
                     <label class="form-label">Ratings</label>
@@ -78,9 +103,14 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-        </div>
-        {{/if}}
+            {{/if}}
+        </div> --}}
     </div>
+    
+
+</div>
+        
+     
 </div>
 </body>
 
