@@ -258,7 +258,7 @@ button {
 .myShelf { 
   width: 60%;
   padding-left: 60px;
-  margin: 50px 0 70px 615px;
+  margin: 50px 0 70px 43%;
   display: flex; 
   flex-flow: row wrap;
   justify-content: flex-start;
@@ -440,4 +440,128 @@ button {
   background-color:rgba(250, 235, 215, 0.727) ;
   border-radius: 10px;
 }
+
+
+/* BOOK DETAILS */
+ 
+ #bookDetailPage {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 4% 0 0 2%;
+ }
+
+ #bookDetailImage { 
+  position: fixed; 
+
+ }
+  #bookDetailImage img {
+  height:600px ;
+  object-fit:contain;
+ }
+
+ #bookDetailImage button{
+  width: 200px;
+  height: 30px;
+  border-radius: 10px;
+ }
+ #bookDetailImage input{ 
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: rgba(184, 243, 245, 0);
+  color: #6B4021;
+  font-size: 15px;
+  font-weight: bolder;
+  border: none;
+ }
+
+
+ #bookDetailsAndComments {  
+  margin:0 0 100px 30%; 
+  text-align: justify;
+ }
+
+ #bookDetailsAndComments  h2{  
+  font-size: 45px; 
+ }
+
+ #bookDetails {
+  background-color: rgba(250, 235, 215, 0.727) ;
+  border-radius: 10px;
+  width: 1000px;
+  padding: 20px;
+ }
+
+ #bookDetails button{
+  width: 200px;
+  border-radius: 10px;
+ }
+
+ #comments {
+  margin:10px 0 0 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+ }
+
+ #comments .card {
+  margin-right: 10px;
+  background-color: rgba(250, 235, 215, 0.727);
+  border-radius: 10px;
+  color: #6B4021;
+  text-align: left;
+
+ }
+
+ #comments .card-body {
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+ }
+
+ #comments button {
+  width: 40px;
+  height: 40px;
+  background-color: #b222227a;
+  border: none;
+ }
+
+ #comments form>button {
+  width: 100px; 
+  margin-top: 10px;
+  
+ }
+
+ /* About US PAGE  */
+
+ #about-us {
+  display: flex;
+  flex-flow: row nowrap;
+ }
+ 
+ .admin-card{  
+  background-color: rgba(250, 235, 215, 0.727) ;
+  border-radius: 10px;
+  margin: 100px 40px 0 0;
+  width: 1000px;
+  padding: 20px;
+
+  display: flex;
+  flex-flow: column nowrap; 
+  align-items: center;
+ }
+
+ .admin-card img {
+  height: 400px;
+  object-fit:contain;
+  margin: 10px;
+
+ }
+
+ .admin-card p {
+  font-size: 20px;
+ }
+  
+
+ 
+
 

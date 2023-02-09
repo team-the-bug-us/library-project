@@ -21,7 +21,7 @@ router.get("/", (req, res, next) => {
     return bookIds
   })
   .then(bookIds=> {
-    console.log(bookIds)
+    // console.log(bookIds)
     topRated(bookIds)
     .then(books => topRatedBooks = books)
     .then(() => asyncFor(topPickedBookIds, callbackFor, topPickedBooks))
