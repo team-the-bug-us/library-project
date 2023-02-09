@@ -4,7 +4,7 @@
 ### A library project
 *by Valentine & Shengwei*
 
-![about us](/public/images/about us.png)
+![About us](/public/images/about us.png)
 
 ## Principal fonctionalities
 
