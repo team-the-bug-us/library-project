@@ -25,6 +25,7 @@
                     {{this}},
                         {{/if}}
                     {{/each}}
+
                      </p>
                     
                  
@@ -33,6 +34,7 @@
                 <p><b>Price:</b>{{book.volumeInfo.saleInfo.retailPrice.amount}}
                 {{book.volumeInfo.saleInfo.retailPrice.currencyCode}}</p>
                 <p><b>Description:</b>{{book.volumeInfo.description}}</p>
+
 
         {{#if userInSession}}
             <form action="/add-book/{{book.id}}/detail" method="post">
