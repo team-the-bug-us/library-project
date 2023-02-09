@@ -30,8 +30,7 @@ const sugestSimilarBooks = require("../utils/getSimilarBooks")
     .then(() =>{
       sugestSimilarBooks(book.volumeInfo.title)
       .then(response => {
-        sugestions = response.data.choices[0].text
-        console.log(sugestions)
+        sugestions = response.data.choices[0].text.split(",")
       })
       .then(() => {
         const imageLinks = book.volumeInfo.imageLinks;
@@ -95,7 +94,7 @@ router.post("/search-results", (req,res,next)=>{
   .then(result => {
     // add property to items
     let items = result.data.items
-    console.log(items[0])
+    // console.log(items[0])
     for(let i=0; i< items.length; i++){
       let imageLinks = items[i].volumeInfo.imageLinks
       if(imageLinks){
@@ -106,28 +105,6 @@ router.post("/search-results", (req,res,next)=>{
     res.render("books/book-list", {items})
   })
   .catch(err => console.log("API access error", err))
-
-//add google book to our data base
-
-/* router.post("/books/:googleId/details", (req, res, next)=>{
-  
-}) */
-
-/*   let books;
-  Users.find()
-    .then((shelf) => {
-      books = shelf
-      return axios.get(createSearchBookUrl(arrWords))
-    })
-  .then(result => {
-    // add property to items
-    const items =result.data.items
-    res.render("books/book-list", {items})
-  })
-  .catch(err => console.log("API access error", err)) */
-
-
-
 })
 
 module.exports = router;

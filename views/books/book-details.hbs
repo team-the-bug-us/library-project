@@ -33,10 +33,13 @@
             </h5></label>
             
             <label for="">Description: {{book.volumeInfo.description}}</label> 
-            <label for="">Bug-us sugests: {{sugestions}}
-{{!--                 {{#each sugestions}}
-                <form action="/books/?" method="post"><button type="submit">{{this}}</button></form>
-                {{/each}} --}}
+            <label for="">Bug-us sugests: 
+                {{#each sugestions}}
+                <form action="/search-results" method="post">
+                <input type="hidden" name="keywords" value="{{this}}">
+                <button type="submit" style="display:inline; background:none;border:none;color:blue;text-decoration:underline;cursor:pointer;">{{this}}</button>
+                </form>,
+                {{/each}}
             </label> 
 
         {{#if userInSession}}
