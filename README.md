@@ -6,12 +6,11 @@
 
 ## Principal fonctionalities
 
-- 
 ### HOME PAGE with top picks and top rated books
 
 * Top picked : the most added to shelf books by our users
 * Top rated: books on our users' shelfs with the best google average ratings
-**Nice feature**: running title to prevent multi-lines wraped title
+* **Nice feature**: running title to prevent multi-lines wraped title
 
 
 ### SIGN UP/LOG IN 
