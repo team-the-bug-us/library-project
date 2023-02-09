@@ -41,13 +41,16 @@
                 <button   type="submit">Add to my shelf</button>
             </form>
         {{/if}}
-                <p><b>Bug-us sugests: 
-                {{#each sugestions}}
+            <div id="recommandations">
+                <p><b>Bug-us sugests:</b></p>
+                    {{#each sugestions}}
                 <form action="/search-results" method="post">
-                <input type="hidden" name="keywords" value="{{this}}">
-                <button type="submit" style="display:inline; background:none;border:none;color:blue;text-decoration:underline;cursor:pointer;">{{this}}</button>
-                </form>,
-                {{/each}}</p>
+                    <input type="hidden" name="keywords" value="{{this}}">
+                    <button type="submit">{{this}}</button>
+                </form>
+                {{/each}} 
+            </div>
+
                     
         
 
