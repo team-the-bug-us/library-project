@@ -11,7 +11,7 @@
 * Top picked : the most added to shelf books by our users
 * Top rated: books on our users' shelfs with the best google average ratings
 * **Nice feature**: running title to prevent multi-lines wraped title
-
+![My Image](../images/my-image.jpg)
 
 ### SIGN UP/LOG IN 
 
