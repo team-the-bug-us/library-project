@@ -2,7 +2,7 @@
 # THE BUG-US
 
 ### A library project
-### __by Valentine & Shengwei__
+### *by Valentine & Shengwei*
 
 ## Principal fonctionalities
 
