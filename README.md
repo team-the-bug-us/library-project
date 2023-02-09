@@ -4,8 +4,6 @@
 ### A library project
 *by Valentine & Shengwei*
 
-![About us](/public/images/about us.png)
-
 ## Principal fonctionalities
 
 ### HOME PAGE with top picks and top rated books
