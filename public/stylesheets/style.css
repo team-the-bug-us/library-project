@@ -45,6 +45,10 @@ li {
   background-size: cover;
   background-repeat: no-repeat;
   height: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  min-width: 1300px;
   /* margin:-20px -20px 0 -20px; */
 }
 
@@ -105,7 +109,6 @@ button {
 }
 
 #page-links {
-  flex-grow: 1;
   display: flex;
 }
 
@@ -149,7 +152,7 @@ button {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex;
 }
 
 .book-card {
@@ -280,15 +283,14 @@ button {
 
 /* STYLING FOR SHELF PAGE */
 .shelf-page {
-  width: 100%;
-  margin: 50px 40px 0 -10px;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  gap: 20px;
+  min-width: 1300px;
 }
 
+
 #video {
+  position: fixed;
+  left: 30px;
+  top: 133px;
   flex-grow: 0;
   background-color: rgba(250, 235, 215, 0.727);
   border-radius: 10px;
@@ -324,11 +326,12 @@ button {
 }
 
 .myShelf {
+  margin: 80px 0 0 600px;
   flex-grow: 1;
   min-width: 550px;
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
 }
 
@@ -407,14 +410,15 @@ button {
   /* "hand" cursor */
 }
 
-#profile-body{
+#profile-body {
+  margin-top:80px;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-#profile-page{
+#profile-page {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-evenly;
@@ -423,7 +427,7 @@ button {
   align-self: center;
 }
 
-#profile-page div{
+#profile-page div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -431,7 +435,7 @@ button {
 }
 
 
-#profile-info{
+#profile-info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -449,7 +453,7 @@ button {
 
 
 #signin {
-  margin: 150px 0 0 430px;
+  margin: 150px 0 0 0;
   width: 590px;
   height: 500px;
   background-color: rgba(98, 51, 18, 0.576);
@@ -494,7 +498,6 @@ button {
 }
 
 .signup p {
-
   color: rgb(184, 243, 245);
   font-size: 20px;
 }
@@ -532,6 +535,11 @@ button {
 
 
 /* HOME PAGE  */
+
+#home-page{
+  text-align: center;
+}
+
 #home-page h2 {
   margin: 50px 0 0 50px;
   width: 1000px;
@@ -690,13 +698,13 @@ button {
   gap: 10px;
 }
 
-.existingComments form{
+.existingComments form {
   text-align: right;
   margin-block-end: 0;
 }
 
-.existingComments .card-body{
-  max-width: 350px ;
+.existingComments .card-body {
+  max-width: 350px;
 }
 
 #comments .newComment {
