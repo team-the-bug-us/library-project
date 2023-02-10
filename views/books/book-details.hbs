@@ -1,120 +1,103 @@
 <body id="general-background">
- 
-<div  id="bookDetailPage" >
-    <div id="bookDetailImage">
-        <form>
-        <button> <input class="blue-btn" type="button" value="Go back!" onclick="history.back()"></button> 
-        <button class="brown-btn"> <a href="/profile/shelf"  >Go to my shelf</a></button>
-    </form>
-        <img src="{{book.volumeInfo.imageLinks}}" class="" alt="book cover"  >
-    </div>
-    <div id="bookDetailsAndComments">
-        <h2 class="">{{book.volumeInfo.title}}</h2>
-        <div id="bookDetails">
+
+    <div id="bookDetailPage">
+        <div id="bookDetailImage">
+            <form>
+                <button> <input class="blue-btn" type="button" value="Go back!" onclick="history.back()"></button>
+                <button class="brown-btn"> <a href="/profile/shelf">Go to my shelf</a></button>
+            </form>
+            <img src="{{book.volumeInfo.imageLinks}}" class="" alt="book cover">
+            {{#if userInSession}}
+            <form action="/add-book/{{book.id}}/detail" method="post">
+                <button id="btn-addFromDetailPage" type="submit">Add to my shelf</button>
+            </form>
+            {{/if}}
+        </div>
+        <div id="bookDetailsAndComments">
+            <h2 class="">{{book.volumeInfo.title}}</h2>
+            <div id="bookDetails">
 
 
-            
-                 <p> <b>Author(s):</b>
-                     
-                        {{#each book.volumeInfo.authors}}
-                        {{#if @last}}
+
+                <p> <b>Author(s):</b>
+
+                    {{#each book.volumeInfo.authors}}
+                    {{#if @last}}
 
                     {{this}}
-                        {{else}}
+                    {{else}}
 
                     {{this}},
-                        {{/if}}
+                    {{/if}}
                     {{/each}}
 
-                     </p>
-                    
-                 
+                </p>
+
+
                 <p><b>Categories:</b>{{book.volumeInfo.categories.[0]}}</p>
                 <p><b>Average Rating:</b>{{book.volumeInfo.averageRating}}</p>
                 <p><b>Price:</b>{{book.volumeInfo.saleInfo.retailPrice.amount}}
-                {{book.volumeInfo.saleInfo.retailPrice.currencyCode}}</p>
+                    {{book.volumeInfo.saleInfo.retailPrice.currencyCode}}</p>
                 <p><b>Description:</b>{{book.volumeInfo.description}}</p>
-
-
-        {{#if userInSession}}
-            <form action="/add-book/{{book.id}}/detail" method="post">
-                <button   type="submit">Add to my shelf</button>
-            </form>
-        {{/if}}
-            <div id="recommandations">
-                <p><b>Bug-us sugests:</b></p>
+                
+                <div id="recommandations">
+                    <p><b>Bug-us sugests:</b></p>
                     {{#each sugestions}}
-                <form action="/search-results" method="post">
-                    <input type="hidden" name="keywords" value="{{this}}">
-                    <button type="submit">{{this}}</button>
-                </form>
-                {{/each}} 
+                    <form action="/search-results" method="post">
+                        <input type="hidden" name="keywords" value="{{this}}">
+                        <button type="submit" >{{this}}</button>
+                    </form>
+                    {{/each}}
+                </div>
+
+
+
+
             </div>
-
-                    
-        
-
-        </div>
-        <div id="comments">
-            {{#each comments}}
-                <div class="card" style="width: 18rem;">
+            <div id="comments">
+                <div class="existingComments">
+                {{#each comments}}
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">- {{userId.username}} posted - </h5>
-                        <h6 class="card-text"><b>User rating:</b>  {{rating}}</h6>
+                        <h6 class="card-text"><b>User rating:</b> {{rating}}</h6>
                         <p class="card-text"><b>Comment:</b> {{comment}}</p>
 
                         {{#if ../userInSession.isAdmin}}
-                        <form action="/delete-comment/{{_id}}" method="post"> 
-                        <button class ="btn" type="submit" >x</button> 
-
+                        <form action="/delete-comment/{{_id}}" method="post">
+                            <button class="btn" type="submit" style="width:30px;margin:0;">x</button>
                         </form>
-
-
                         {{/if}}
                     </div>
                 </div>
-            {{/each}}
-            {{#if userInSession}}
-            <div class="card">
-
-            <form class="card-body" action="/books/{{book.id}}/post-comment" method="post">
-            <h5 class="card-title"> Add my own comment</h5>
-                <div class="card-text">
-                    <label class="form-label">Ratings</label>
-                    <input type="number" class="form-control" name="rating" min="0" max="5">
+                {{/each}}
                 </div>
-                <div class="card-text">
-                    <label class="form-label">Comment</label>
-                    <input type="text" class="form-control" name="comment">
+                <div class="newComment">
+                {{#if userInSession}}
+                <div class="card">
+                    <form class="card-body" action="/books/{{book.id}}/post-comment" method="post">
+                        <h5 class="card-title"> Add my own comment</h5>
+                        <div class="card-text">
+                            <label class="form-label">Ratings</label>
+                            <input type="number" class="form-control" name="rating" min="0" max="5">
+                        </div>
+                        <div class="card-text">
+                            <label class="form-label">Comment</label>
+                            <textarea type="text" class="form-control" name="comment"> </textarea>
+                        </div>
+                        <button class="btn" type="submit">Submit</button>
+                    </form>
                 </div>
-                <button class ="btn" type="submit" >Submit</button>
-            </form>
+                {{/if}}
+                </div>
 
             </div>
-            {{/if}}
 
         </div>
-        {{!-- <div id="addComments">
-             {{#if userInSession}}
-            <form action="/books/{{book.id}}/post-comment" method="post">
-                <div class="mb-3">
-                    <label class="form-label">Ratings</label>
-                    <input type="number" class="form-control" name="rating" min="0" max="5">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Comment</label>
-                    <input type="text" class="form-control" name="comment">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-            {{/if}}
-        </div> --}}
+
+
     </div>
-    
 
-</div>
-        
-     
-</div>
+
+    </div>
 </body>
-

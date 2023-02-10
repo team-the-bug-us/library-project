@@ -1,5 +1,6 @@
 <body id="general-background">
 
+  <div id="profile-body">
   <section id="profile-page">
     <div id="profile-picture">
       <img src="{{userInSession.profileImgUrl}}" alt="profile image" />
@@ -17,19 +18,23 @@
     </div>
 
     <div id="profile-info">
-
-      <h2>Dear <b> {{userInSession.username}}</b>, </h2>
-      <p>you are connected to your library <b>The Bug-us.</b>  </p>
-      <ul>
-        <li>Explore new books with the Search-Bar</li>
-        <li>Add your favorite books to your shelf</li>
-        <li>And share your opinion on the books you read</li>
-      </ul>
-      <button class="brown-btn"><a href="/profile/shelf">Enter my shelf
+      <div>
+        <h2>Dear <b> {{userInSession.username}}</b>, </h2>
+        <p>you are connected to your library <b>The Bug-us.</b> </p>
+        <ul>
+          <li>Explore new books with the Search-Bar</li>
+          <li>Add your favorite books to your shelf</li>
+          <li>And share your opinion on the books you read</li>
+        </ul>
+      </div>
+    
+      <button class="brown-btn"><a href="/profile/shelf">See my shelf
         </a></button>
 
     </div>
 
   </section>
+  </div>
+
 
 </body>
