@@ -283,7 +283,7 @@ button {
   width: 100%;
   margin: 50px 40px 0 -10px;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   justify-content: center;
   gap: 20px;
 }
