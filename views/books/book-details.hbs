@@ -4,7 +4,11 @@
         <div id="bookDetailImage">
             <form>
                 <button> <input class="blue-btn" type="button" value="Go back!" onclick="history.back()"></button>
+                
+                
+                {{#if userInSession}}
                 <button class="brown-btn"> <a href="/profile/shelf">Go to my shelf</a></button>
+                {{/if}}
             </form>
             <img src="{{book.volumeInfo.imageLinks}}" class="" alt="book cover">
             {{#if userInSession}}
