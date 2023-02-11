@@ -542,6 +542,7 @@ button {
 
 #home-page h2 {
   margin: 50px 0 0 50px;
+  text-align: left;
   width: 1000px;
   height: 50px;
   font-size: 50px;
